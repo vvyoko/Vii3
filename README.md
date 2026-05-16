@@ -1,32 +1,36 @@
+[中文版本](./README_中文.md)
+
 # Vii3
-> 基于 Avalonia 的高性能图片无边框浏览器，极致流畅的切换体验，全面的格式支持，高度自定义。
-古法编程闭门造车之作
-为了解决大图切换时的阻塞而产生
+> A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support, and high customizability.
+A hobby project developed in isolation
+Created to solve the blocking issue when switching between large images
 
-## 特性
-- Avalonia AOT 编译带来极致的启动速度
-- 高度优化的加载流程，确保切换无阻塞
-    - 保证机械硬盘仍有优秀体验
-- 高度优化的缩略图支持
-- 由 SkiaSharp 及 Magick.Net 驱动，全图片格式支持
-- 动态 Gif，Webp，Apng，Jxl，Avif
-- 由 Libmpv 驱动 实现安卓动态照片支持
-   - 需自行下载 `libmpv-2.dll` 放置程序所在目录
-   - 大部分人无此需求,且 `libmpv` 比较大 ,需要的自行下载
-- 由 SharpCompress 驱动带来 Zip，Rar 压缩包格式支持
-- 由 NLua 驱动带来 高级需求 lua 支持
-- 界面元素可全部移除以去除对浏览的干扰
-- 快捷键，右键菜单可完全自定义
-- 多语言可由用户完成生成,更新
-    - 设置界面新建
-    - 导出未翻译
-    - 交由AI翻译并复制
-    - 导入即可
+## Features
+- Avalonia AOT compilation for extreme startup speed
+- Highly optimized loading process ensuring smooth switching without blocking
+    - Ensures excellent experience even on mechanical hard drives
+- Highly optimized thumbnail support
+- Full image format support powered by SkiaSharp and Magick.Net
+- Dynamic Gif, Webp, Apng, Jxl, Avif support
+- Android live photo support powered by Libmpv
+   - You need to download `libmpv-2.dll` yourself and place it in the program directory
+   - Most people don't need this, and `libmpv` is quite large, download it yourself if needed
+- Zip, Rar archive format support powered by SharpCompress
+- Advanced Lua scripting support powered by NLua
+- All interface elements can be removed to eliminate browsing distractions
+- Fully customizable keyboard shortcuts and right-click menus
+- Multi-language support can be created and updated by users
+    - Create new in settings interface
+    - Export untranslated items
+    - Have AI translate and copy
+    - Import
 
-## 展示
+## Screenshots
 ![switch](images/switch.gif)
 
 ![main](images/main.jpeg)
+
+![main](images/main_2.jpeg)
 
 ![thumbnail](images/thumbnail.jpeg)
 
@@ -38,21 +42,20 @@
 
 ![sesettingtting_quictshort](images/setting.jpeg)
 
-## 其他
-  - [为什么是3，因为有前作](https://meta.appinn.net/t/topic/35989/)
-  - [文档](文档.md)
-  - [Lua文档](Lua文档.md)
-  - [已知问题](已经问题.md)
-  - 强烈建议设置`解码宽度`为屏幕宽度 1.5-2 倍左右
-    - 大幅提升大图读取速度,减少摩尔纹
-    - 仅支持 `SkiaSharp` 格式 `.bmp`, `.jpg`, `.jpeg`, `.png`,  `.webp`, `.gif`, `.ico`, `.wbmp`
+## Other
+  - [Why 3? Because there was a predecessor](https://meta.appinn.net/t/topic/35989/)
+  - [Documentation](Documentation.md)
+  - [Lua Documentation](Lua-Documentation.md)
+  - [Known Issues](Known-Issues.md)
+  - Strongly recommend setting `Decode Width` to approximately 1.5-2x your screen width
+    - Greatly improves large image loading speed and reduces moiré patterns
+    - Only supports `SkiaSharp` formats: `.bmp`, `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.ico`, `.wbmp`
 
 
-## 引用
+## Dependencies
  - [Avalonia](https://avaloniaui.net/)
  - [Magick.NET](https://github.com/dlemstra/Magick.NET)
  - [NLua](https://github.com/nlua/NLua)
  - [SharpCompress](https://github.com/adamhathcock/sharpcompress)
  - [Microsoft.Data.Sqlite](https://docs.microsoft.com/dotnet/standard/data/sqlite/)
  - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
-
