@@ -40,9 +40,9 @@
 
 ## 其他
   - [为什么是3，因为有前作](https://meta.appinn.net/t/topic/35989/)
-  - [文档](文档.md)
-  - [Lua文档](Lua文档.md)
-  - [已知问题](已经问题.md)
+  - [文档](zh_Documentation.md)
+  - [Lua文档](zh_Lua-Documentation.md)
+  - [已知问题](zh_Known-Issues.md)
   - 强烈建议设置`解码宽度`为屏幕宽度 1.5-2 倍左右
     - 大幅提升大图读取速度,减少摩尔纹
     - 仅支持 `SkiaSharp` 格式 `.bmp`, `.jpg`, `.jpeg`, `.png`,  `.webp`, `.gif`, `.ico`, `.wbmp`

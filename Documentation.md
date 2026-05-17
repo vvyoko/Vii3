@@ -22,6 +22,11 @@
 - Temp Directory Location: `%temp%\vvyoko\Vii3`
   - Currently only stores logs
   - Compressed archives and videos from dynamic photos have been fully migrated to memory streams
+- Shortcut Keys
+  - Priority Level: All shortcuts except global ones are at the same level; non-global shortcuts take precedence in execution.
+  - Shortcut keys are not displayed in right-click menus, as the menu only shows system-recognized shortcuts.
+  - Shortcuts defined in Lua override those configured in settings.
+  - Cluttered display of shortcut keys in settings is due to insufficient UI design optimization.
 - Command Line Arguments
   - Arguments starting with `--` are commands to be executed
     - Format: `--commandname[=optionalparameter]`

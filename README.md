@@ -1,4 +1,4 @@
-[中文版本](./README_中文.md)
+[中文版本](./zh_README.md)
 
 # Vii3
 > A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support, and high customizability.
