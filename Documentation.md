@@ -1,7 +1,7 @@
 ## Special
 - Loading Process
   - An image is defined as a file with an image file extension
-  - Opening a single image will open all files in the same directory
+  - Opening a single image will open all images in the same directory
     - File change monitoring is enabled to respond to external modifications
     - i.e., deleting or modifying files by external programs will be detected and updated
   - Opening a folder itself will search for all images including subfolders
@@ -163,10 +163,10 @@
 * #### SetWallPaper
   - Description: Set as desktop wallpaper
   - ID: 352
-* #### MakeCopy
+* #### CreateCopy
   - Description: Create copy
   - ID: 353
-* #### MakeCopyToPath
+* #### CreateCopyToPath
   - Description: Create copy to specified path
   - ID: 354
   - Parameter: string
