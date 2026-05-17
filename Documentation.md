@@ -1,4 +1,10 @@
 ## Special
+- External Dependencies for Android Live Photos
+  - Playing video streams in Live Photos depends on `libmpv-2.dll`.
+  - Due to the large file size and the contagion of open-source licenses, this software does not include this component by default. Users who need it must download it themselves and place it in the same directory as `vii3.exe`.
+  - Download Methods:
+    - A (Small Size, Older Version): Download `media_kit_test_win32_x64.7z` from the [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) release, extract the `libmpv-2.dll` file from it.
+    - B (Small Size, Newer Version): Go to [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) to download the latest `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` archive, extract the `libmpv-2.dll` file from it.
 - Loading Process
   - An image is defined as a file with an image file extension
   - Opening a single image will open all images in the same directory
@@ -202,7 +208,7 @@
     - Hide flag: 0=show external program window (default), 1=hide external program window
     - Working directory: Supports placeholder replacement, automatically normalized to absolute path after replacement
     - Separator: | is only used as parameter separator
-    - mspaint → open current file with Paint
+    - Example: `mspaint` → open current file with Paint
 * #### ClearDatabase
   - Description: Clear database in config directory
   - ID: 371
@@ -216,7 +222,7 @@
   - ID: 380
   - Parameter: string (URL)
     - Placeholders
-      - Coordinate system (add to front of URL when specified)
+      - Coordinate system (add to front of URL when specified with `|`)
         - `GCJ02`
         - `BD09`
         - `WGS84` (default)
@@ -233,12 +239,12 @@
 * #### CycleSortType
   - Description: Cycle through sort modes
   - ID: 402
-  - Parameter: string ([SortField](#SortField))
+  - Parameter: ([SortField](#SortField))
     - Example: `Path,Size`
 * #### CycleFillMode
   - Description: Cycle through fill modes
   - ID: 403
-  - Parameter: string ([ImageFillMode](#ImageFillMode))
+  - Parameter: ([ImageFillMode](#ImageFillMode))
     - Example: `FillWindow,FitWindow`
 </details>
 
