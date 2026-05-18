@@ -4,7 +4,7 @@
   - 由于文件体积较大且涉及开源协议传染性，本软件默认不附带此组件，有需求的用户需自行下载并放置于 `vii3.exe` 同级目录下。
   - 下载方案：
     - A（体积小, 版本旧）：下载 [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) 发布的 `media_kit_test_win32_x64.7z`，解压并提取其中的 `libmpv-2.dll`。
-    - B（体积小,版本新）： 前往 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) 下载最新的 `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` 压缩包，解压并提取其中的 `libmpv-2.dll`。
+    - B（体积大,版本新）： 前往 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) 下载最新的 `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` 压缩包，解压并提取其中的 `libmpv-2.dll`。
 - 加载流程
   - 图片的定义是后缀名是图片后缀名
   - 打开单张图片会打开同目录下所有图片
@@ -33,6 +33,15 @@
   - 右键菜单部分不显示快捷键是因为它只能放它认为的快捷键
   - Lua 中定义的快捷键会覆盖设置中的快捷键
   - 设置中的快捷键显示太乱属于美工无力
+- 在标题和图片信息处按住左键可移动窗口位置
+- 缩略图显示时只允许部分命令
+  - ThumbnailGridAction
+  - CloseApp
+  - SendMessageToScript
+    - 如有必要可借助它(Lua)实现其他命令
+  - Navigate
+    - NextFolderOrArchive
+    - PrevFolderOrArchive
 - 命令行参数
   - 以 `--` 开始的是待执行命令
     - 格式 `--命令名[=可选参数]`

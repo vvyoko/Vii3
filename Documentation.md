@@ -4,7 +4,7 @@
   - Due to the large file size and the contagion of open-source licenses, this software does not include this component by default. Users who need it must download it themselves and place it in the same directory as `vii3.exe`.
   - Download Methods:
     - A (Small Size, Older Version): Download `media_kit_test_win32_x64.7z` from the [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) release, extract the `libmpv-2.dll` file from it.
-    - B (Small Size, Newer Version): Go to [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) to download the latest `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` archive, extract the `libmpv-2.dll` file from it.
+    - B (Big Size, Newer Version): Go to [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) to download the latest `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` archive, extract the `libmpv-2.dll` file from it.
 - Loading Process
   - An image is defined as a file with an image file extension
   - Opening a single image will open all images in the same directory
@@ -33,6 +33,15 @@
   - Shortcut keys are not displayed in right-click menus, as the menu only shows system-recognized shortcuts.
   - Shortcuts defined in Lua override those configured in settings.
   - Cluttered display of shortcut keys in settings is due to insufficient UI design optimization.
+- Press and hold the left mouse button on the title and image info area to move the window
+- Only partial commands are allowed for thumbnails is visible
+  - ThumbnailGridAction
+  - CloseApp
+  - SendMessageToScript
+    - Use Lua to implement other commands if needed
+  - Navigate
+    - NextFolderOrArchive
+    - PrevFolderOrArchive
 - Command Line Arguments
   - Arguments starting with `--` are commands to be executed
     - Format: `--commandname[=optionalparameter]`
