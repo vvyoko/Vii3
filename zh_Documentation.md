@@ -1,10 +1,11 @@
 ## 特殊
-- 安卓动态照片（Live Photo）的外部依赖
+- 动态照片
+  - 苹果暂只支持同目录下存在与 `Heic` 同名的 `Mov` 文件
   - 播放动态照片中的视频流依赖于 `libmpv-2.dll`。
   - 由于文件体积较大且涉及开源协议传染性，本软件默认不附带此组件，有需求的用户需自行下载并放置于 `vii3.exe` 同级目录下。
   - 下载方案：
     - A（体积小, 版本旧）：下载 [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) 发布的 `media_kit_test_win32_x64.7z`，解压并提取其中的 `libmpv-2.dll`。
-    - B（体积大,版本新）： 前往 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) 下载最新的 `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` 压缩包，解压并提取其中的 `libmpv-2.dll`。
+    - B（体积大,版本新）： 下载 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases)  `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` ，解压并提取其中的 `libmpv-2.dll`。
 - 加载流程
   - 图片的定义是后缀名是图片后缀名
   - 打开单张图片会打开同目录下所有图片

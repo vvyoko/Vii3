@@ -1,7 +1,7 @@
 [中文版本](./zh_README.md)
 
 # Vii3
-> A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support, and high customizability.
+> A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support.
 A hobby project developed in isolation
 Created to solve the blocking issue when switching between large images
 
@@ -11,11 +11,11 @@ Created to solve the blocking issue when switching between large images
     - Ensures excellent experience even on mechanical hard drives
 - Highly optimized thumbnail support
 - Full image format support powered by SkiaSharp and Magick.Net
-- Dynamic Gif, Webp, Apng, Jxl, Avif support
-- Android live photo support powered by Libmpv
+- Animation Gif, Webp, Apng, Jxl, Avif support
+- live photo support powered by Libmpv
    - You need to download `libmpv-2.dll` yourself and place it in the program directory
    - Most people don't need this, and `libmpv` is quite large, download it yourself if needed
-- Zip, Rar archive format support powered by SharpCompress
+- Zip, Rar, Cbz, Cbr archive format support powered by SharpCompress
 - Advanced Lua scripting support powered by NLua
 - All interface elements can be removed to eliminate browsing distractions
 - Fully customizable keyboard shortcuts and right-click menus
@@ -48,7 +48,7 @@ Created to solve the blocking issue when switching between large images
   - [Lua Documentation](Lua-Documentation.md)
   - [Known Issues](Known-Issues.md)
   - Strongly recommend setting `Decode Width` to approximately 1.5-2x your screen width
-    - Greatly improves large image loading speed and reduces moiré patterns
+    - Greatly improves large image loading speed
     - Only supports `SkiaSharp` formats: `.bmp`, `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.ico`, `.wbmp`
 
 

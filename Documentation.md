@@ -1,10 +1,11 @@
 ## Special
-- External Dependencies for Android Live Photos
+- Live Photos
+  - Apple currently only supports Mov files with the same name as Heic in the same directory
   - Playing video streams in Live Photos depends on `libmpv-2.dll`.
   - Due to the large file size and the contagion of open-source licenses, this software does not include this component by default. Users who need it must download it themselves and place it in the same directory as `vii3.exe`.
   - Download Methods:
     - A (Small Size, Older Version): Download `media_kit_test_win32_x64.7z` from the [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) release, extract the `libmpv-2.dll` file from it.
-    - B (Big Size, Newer Version): Go to [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases) to download the latest `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` archive, extract the `libmpv-2.dll` file from it.
+    - B (Big Size, Newer Version): Download `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` form the [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases), extract the `libmpv-2.dll` file from it.
 - Loading Process
   - An image is defined as a file with an image file extension
   - Opening a single image will open all images in the same directory
