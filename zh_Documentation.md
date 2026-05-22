@@ -6,6 +6,12 @@
   - 下载方案：
     - A（体积小, 版本旧）：下载 [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) 发布的 `media_kit_test_win32_x64.7z`，解压并提取其中的 `libmpv-2.dll`。
     - B（体积大,版本新）： 下载 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases)  `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` ，解压并提取其中的 `libmpv-2.dll`。
+  - 复用方案: 
+    - 若你在系统其他地方已拥有该组件，可彻底退出软件后，打开程序目录下的 `data\set.json` 文件。
+    - 找到 `"LibMpvPath"` 字段，将其值修改为你想复用的 `libmpv-2.dll` 的**绝对路径**。
+      - 文件名必需为 `libmpv-2.dll` 而不是 `libmpv.dll` 或其他
+      - 路径需符合 `Json` 规范使用转义 `\\` 或用 `/`
+      - 如 `"LibMpvPath": "D:\\OneDrive\\Program\\AHK\\lib\\libmpv\\libmpv-2.dll"`
 - 加载流程
   - 图片的定义是后缀名是图片后缀名
   - 打开单张图片会打开同目录下所有图片
