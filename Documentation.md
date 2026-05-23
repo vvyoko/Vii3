@@ -36,19 +36,28 @@
   - Currently only stores logs
   - Compressed archives and videos from dynamic photos have been fully migrated to memory streams
 - Shortcut Keys
-  - Priority Level: All shortcuts except global ones are at the same level; non-global shortcuts take precedence in execution.
+  - Layer Priority: Except for the global layer, all layers are peer levels; keys registered in a specific layer take precedence over global ones.
   - Shortcut keys are not displayed in right-click menus, as the menu only shows system-recognized shortcuts.
   - Shortcuts defined in Lua override those configured in settings.
   - Cluttered display of shortcut keys in settings is due to insufficient UI design optimization.
+  - Thumbnail layer Mouse Binding Restrictions:
+    - Never bind any actions involving mouse clicks or scroll wheel (even with Ctrl/Shift modifiers).
+    - The native grid control forcefully hooks and monopolizes all mouse-related window messages.
+    - Any custom mouse hotkeys will invariably be swallowed and neutralised by the control itself.
 - Press and hold the left mouse button on the title and image info area to move the window
-- Only partial commands are allowed for thumbnails is visible
-  - ThumbnailGridAction
-  - CloseApp
-  - SendMessageToScript
-    - Use Lua to implement other commands if needed
-  - Navigate
-    - NextFolderOrArchive
-    - PrevFolderOrArchive
+- Thumbnail
+  - Cache Hit & Invalidation Mechanism:
+    - Matching Threshold: Requires the absolute delta of quality to be ≤ 10, and the absolute delta between the requested size and either the cached width or height to be ≤ 10.
+    - Invalidation & Regeneration: Any adjustment exceeding this tolerance scale will cause the old cache to be deemed invalid and skipped, subsequently triggering the generation and overwriting of a new cache entry.
+  - Allowed commands
+    - ThumbnailGridAction
+    - ThumbnailSizeChange
+    - CloseApp
+    - SendMessageToScript
+      - Use Lua to implement other commands if needed
+    - Navigate
+      - NextFolderOrArchive
+      - PrevFolderOrArchive
 - Command Line Arguments
   - Arguments starting with `--` are commands to be executed
     - Format: `--commandname[=optionalparameter]`
@@ -145,6 +154,12 @@
   - Description: Thumbnail grid action
   - ID: 230
   - Parameter: [ThumbnailGridAction](#ThumbnailGridAction)
+* #### ThumbnailSizeChange
+  - Description: Adjust thumbnail dimensions
+  - ID: 231
+  - Parameter: `int`
+    - Example: `4` -> Current size `+4`
+    - Example: `-4` -> Current size `-4`
 * #### VideoAction
   - Description: Video action
   - ID: 240

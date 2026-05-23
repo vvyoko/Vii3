@@ -23,21 +23,26 @@
       - So data reading was implemented manually for now
       - Waiting for upstream fix or it may not be fixable
 
+- **Thumbnails**
+  - **The control is no longer maintained; bugs may occur, but there is no alternative**
+  - **Intermittent (or Frequent?) Positional Glitches**:
+    - Suspected to be an issue with the control itself, making it difficult to resolve
+  - **Size Adjustment**:
+    - Certain values may cause incorrect positioning and movement
+      - Set other values
+    - Occasionally, some images may fail to load
+      - Difficult to replicate, making it hard to target and resolve
+      - The simplest workaround for now is to restart the application
+  - **Image failure messages appear on the thumbnail interface**:
+    - An edge case; please switch to the next image
 
 - **Some Exif Values are Garbled, Mainly Because EXIF Has No Encoding**
 
-
 - **ICO is a Container Format, the Image Info Detection Shows Png is Correct Behavior**
-
-
-- **Thumbnail Interface Occasionally (Frequently?) Has Position Displacement Issues**
-  - Suspected to be an issue with virtual controls themselves, difficult to resolve
-
 
 - **Avalonia Version Stuck at 11**
   - Version 12 removed the core property `ExtendClientAreaChromeHints` that the program depends on
   - Various attempts were made but still unable to resolve
-
 
 - **Image Failure Info Appears in Thumbnail Interface**
   - Extreme case, please switch to next image

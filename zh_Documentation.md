@@ -40,15 +40,24 @@
   - 右键菜单部分不显示快捷键是因为它只能放它认为的快捷键
   - Lua 中定义的快捷键会覆盖设置中的快捷键
   - 设置中的快捷键显示太乱属于美工无力
+  - 缩略图层级绑定限制
+    - 请勿绑定任何涉及鼠标按键或滚轮的操作（即使带有 Ctrl/Shift 等修饰键）。
+    - 因为缩略图的原生控件本身会强行持有鼠标事件
+    - 自定义的鼠标绑定大概率会被控件拦截而失效。
 - 在标题和图片信息处按住左键可移动窗口位置
-- 缩略图显示时只允许部分命令
-  - ThumbnailGridAction
-  - CloseApp
-  - SendMessageToScript
-    - 如有必要可借助它(Lua)实现其他命令
-  - Navigate
-    - NextFolderOrArchive
-    - PrevFolderOrArchive
+- 缩略图
+  - 缓存命中与失效机制：
+    - 匹配阈值：请求质量与缓存质量绝对差值 ≤ 10，且请求尺寸与缓存宽或高任意一项的绝对差值 ≤ 10。
+    - 失效重构：若调整幅度超出上述容差范围，旧缓存将直接判定为失效并跳过，随后触发新缓存的生成与覆盖。
+  - 允许命令
+    - ThumbnailGridAction
+    - ThumbnailSizeChange
+    - CloseApp
+    - SendMessageToScript
+      - 如有必要可借助它(Lua)实现其他命令
+    - Navigate
+      - NextFolderOrArchive
+      - PrevFolderOrArchive
 - 命令行参数
   - 以 `--` 开始的是待执行命令
     - 格式 `--命令名[=可选参数]`
@@ -141,6 +150,12 @@
 * #### LoadOriginalImage
   - 说明: 加载/查看原图
   - ID: 220
+* #### ThumbnailSizeChange
+  - 说明: 调整缩略图尺寸
+  - ID: 231
+  - 参数: `int`
+    - 举例:`4` -> 当前尺寸 `+4`
+    - 举例:`-4` -> 当前尺寸 `-4`
 * #### ThumbnailGridAction
   - 说明: 缩略图动作
   - ID: 230

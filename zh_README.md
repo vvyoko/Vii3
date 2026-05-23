@@ -7,7 +7,6 @@
 - Avalonia AOT 编译带来极致的启动速度
 - 高度优化的加载流程，确保切换无阻塞
     - 保证机械硬盘仍有优秀体验
-- 高度优化的缩略图支持
 - 由 SkiaSharp 及 Magick.Net 驱动，全图片格式支持
 - 动图 Gif，Webp，Apng，Jxl，Avif
 - 由 Libmpv 驱动 实现动态照片支持

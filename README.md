@@ -9,7 +9,6 @@ Created to solve the blocking issue when switching between large images
 - Avalonia AOT compilation for extreme startup speed
 - Highly optimized loading process ensuring smooth switching without blocking
     - Ensures excellent experience even on mechanical hard drives
-- Highly optimized thumbnail support
 - Full image format support powered by SkiaSharp and Magick.Net
 - Animation Gif, Webp, Apng, Jxl, Avif support
 - live photo support powered by Libmpv
