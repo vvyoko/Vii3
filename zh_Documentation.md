@@ -1,6 +1,5 @@
 ## 特殊
 - 动态照片
-  - 苹果暂只支持同目录下存在与 `Heic` 同名的 `Mov` 文件
   - 播放动态照片中的视频流依赖于 `libmpv-2.dll`。
   - 由于文件体积较大且涉及开源协议传染性，本软件默认不附带此组件，有需求的用户需自行下载并放置于 `vii3.exe` 同级目录下。
   - 下载方案：
@@ -83,10 +82,20 @@
         ```
   - 遇到第一个以非 `--` 开始直到结束,都视为文件或文件夹并加载
 
-
+---
 ## 设置
-  - 请悬浮查看注释,如仍不知用途可反馈
-
+  - 通用设置手动编辑选项
+    - 需退出程序后编辑 `data\set.json`
+    - 未在设置界面添加代表不希望普通用户去自定义
+    - `"LibMpvPath"` 参考上文
+    - `Background`
+      - 用于设置软解渲染下背景颜色 `#AARRGGBB` 或 `#RRGGBB`
+      - 无效值或未设置回退至 `#202020`
+  - 快捷键和菜单
+    - 如参数或目标值不明白如何设置
+    - 悬浮 `命令` `绑定状态` 查看原始值
+    - 并在下方定义中搜索并查看其详细说明
+---
 <details>
 <summary><h2 style="display: inline; margin: 0; font-size: 1.5em;">定义</h2></summary>
 
@@ -150,16 +159,16 @@
 * #### LoadOriginalImage
   - 说明: 加载/查看原图
   - ID: 220
+* #### ThumbnailGridAction
+  - 说明: 缩略图动作
+  - ID: 230
+  - 参数: [ThumbnailGridAction](#ThumbnailGridAction)
 * #### ThumbnailSizeChange
   - 说明: 调整缩略图尺寸
   - ID: 231
   - 参数: `int`
     - 举例:`4` -> 当前尺寸 `+4`
     - 举例:`-4` -> 当前尺寸 `-4`
-* #### ThumbnailGridAction
-  - 说明: 缩略图动作
-  - ID: 230
-  - 参数: [ThumbnailGridAction](#ThumbnailGridAction)
 * #### VideoAction
   - 说明: 视频动作
   - ID: 240

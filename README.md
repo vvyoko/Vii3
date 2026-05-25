@@ -4,7 +4,7 @@
 > A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support.
 A hobby project developed in isolation
 Created to solve the blocking issue when switching between large images
-
+---
 ## Features
 - Avalonia AOT compilation for extreme startup speed
 - Highly optimized loading process ensuring smooth switching without blocking
@@ -17,13 +17,13 @@ Created to solve the blocking issue when switching between large images
 - Zip, Rar, Cbz, Cbr archive format support powered by SharpCompress
 - Advanced Lua scripting support powered by NLua
 - All interface elements can be removed to eliminate browsing distractions
-- Fully customizable keyboard shortcuts and right-click menus
+- Fully customizable keyboard shortcuts and contextmenu
 - Multi-language support can be created and updated by users
     - Create new in settings interface
     - Export untranslated items
     - Have AI translate and copy
     - Import
-
+---
 ## Screenshots
 ![switch](images/switch.gif)
 
@@ -41,6 +41,7 @@ Created to solve the blocking issue when switching between large images
 
 ![sesettingtting_quictshort](images/setting.jpeg)
 
+---
 ## Other
   - [Why 3? Because there was a predecessor](https://meta.appinn.net/t/topic/35989/)
   - [Documentation](Documentation.md)
@@ -50,7 +51,7 @@ Created to solve the blocking issue when switching between large images
     - Greatly improves large image loading speed
     - Only supports `SkiaSharp` formats: `.bmp`, `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.ico`, `.wbmp`
 
-
+---
 ## Dependencies
  - [Avalonia](https://avaloniaui.net/)
  - [Magick.NET](https://github.com/dlemstra/Magick.NET)

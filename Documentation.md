@@ -1,6 +1,5 @@
 ## Special
 - Live Photos
-  - Apple currently only supports Live Photos when a `.mov` file with the exact same name as the `.heic` file exists within the same directory.
   - Playing the video stream in Live Photos requires `libmpv-2.dll`.
   - Due to the large file size and the copyleft nature of its open-source license, this software does not include this component by default. Users who need this feature must download it manually and place it in the same directory as `vii3.exe`.
   - Download Methods:
@@ -82,11 +81,21 @@
           }
         ```
   - The first non `--` argument until the end is treated as a file or folder and loaded
-
+---
 
 ## Settings
-  - Please hover over items to view comments. If you still don't understand the purpose, feel free to provide feedback
-
+  - Manual Editing Options for General Settings
+    - Requires exiting the program before editing `data\set.json`.
+    - Options not included in the settings interface imply that regular users are not encouraged to customize them.
+    - For `"LibMpvPath"`, please refer to the section above.
+    - `Background`
+      - Used to set the background color in software render mode using the `#AARRGGBB` or `#RRGGBB` format.
+      - Invalid values or missing configurations will fallback to `#202020`.
+  - Shortcuts and Menus
+    - If you are unsure how to configure parameters or target values:
+    - Hover over `Command` or `Binding Status` to view the original values.
+    - Then, search for and review their detailed descriptions in the definitions below.
+---
 <details>
 <summary><h2 style="display: inline; margin: 0; font-size: 1.5em;">Definitions</h2></summary>
 

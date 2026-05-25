@@ -2,7 +2,7 @@
 > 基于 Avalonia 的高性能图片无边框浏览器，极致流畅的切换体验，全面的格式支持。
 古法编程闭门造车之作
 为了解决大图切换时的阻塞而产生
-
+---
 ## 特性
 - Avalonia AOT 编译带来极致的启动速度
 - 高度优化的加载流程，确保切换无阻塞
@@ -21,7 +21,7 @@
     - 导出未翻译
     - 交由AI翻译并复制
     - 导入即可
-
+---
 ## 展示
 ![switch](images/switch.gif)
 
@@ -37,6 +37,7 @@
 
 ![sesettingtting_quictshort](images/setting_zh.jpeg)
 
+---
 ## 其他
   - [为什么是3，因为有前作](https://meta.appinn.net/t/topic/35989/)
   - [文档](zh_Documentation.md)
@@ -45,7 +46,7 @@
   - 强烈建议设置`解码宽度`为屏幕宽度 1.5-2 倍左右
     - 大幅提升大图读取速度
     - 仅支持 `SkiaSharp` 格式 `.bmp`, `.jpg`, `.jpeg`, `.png`,  `.webp`, `.gif`, `.ico`, `.wbmp`
-
+---
 
 ## 引用
  - [Avalonia](https://avaloniaui.net/)
