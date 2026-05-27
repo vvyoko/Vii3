@@ -200,6 +200,14 @@
   - ID: 322
   - Parameter: string
     - Specify the file path to save to
+* #### ConvertImageFormat
+  - Description: Converts the image format
+    - Can only convert the current image
+    - Applicable for temporary use only
+  - ID: 330
+  - Parameters: string
+    - The extension name of the target image format
+    - Example: `.jpg` to convert to `Jpg` format
 * #### FileRecycle
   - Description: Move to recycle bin
   - ID: 350
