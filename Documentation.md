@@ -50,7 +50,6 @@
     - Invalidation & Regeneration: Any adjustment exceeding this tolerance scale will cause the old cache to be deemed invalid and skipped, subsequently triggering the generation and overwriting of a new cache entry.
   - Allowed commands
     - ThumbnailGridAction
-    - ThumbnailSizeChange
     - CloseApp
     - SendMessageToScript
       - Use Lua to implement other commands if needed
@@ -152,6 +151,12 @@
   - Description: Set fill mode
   - ID: 202
   - Parameter: [ImageFillMode](#ImageFillMode)
+* #### ZoomIn
+  - Description: Zoom In
+  - ID: 203
+* #### ZoomOut
+  - Description: Zoom Out
+  - ID: 204
 * #### RotateMirror
   - Description: Rotate & Mirror
   - ID: 210
@@ -163,12 +168,6 @@
   - Description: Thumbnail grid action
   - ID: 230
   - Parameter: [ThumbnailGridAction](#ThumbnailGridAction)
-* #### ThumbnailSizeChange
-  - Description: Adjust thumbnail dimensions
-  - ID: 231
-  - Parameter: `int`
-    - Example: `4` -> Current size `+4`
-    - Example: `-4` -> Current size `-4`
 * #### VideoAction
   - Description: Video action
   - ID: 240
@@ -489,6 +488,12 @@
 * ##### OpenSelected
   - Description: Open selected item
   - ID: 8
+* ##### ZoomIn
+  - Description: Zoom In
+  - ID: 9
+* ##### ZoomOut
+  - Description: Zoom Out
+  - ID: 10
 </details>
 
 <details style="margin-left: 20px;" id="VideoAction" open>
@@ -610,6 +615,9 @@
 * ##### ImageTopAligned
   - Description: Image top aligned
   - ID: 31
+* ##### Crop
+  - Description: Crop
+  - ID: 32
 * ##### WindowFitsImage
   - Description: Window fit to image
   - ID: 35

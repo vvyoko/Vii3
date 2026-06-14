@@ -50,7 +50,6 @@
     - 失效重构：若调整幅度超出上述容差范围，旧缓存将直接判定为失效并跳过，随后触发新缓存的生成与覆盖。
   - 允许命令
     - ThumbnailGridAction
-    - ThumbnailSizeChange
     - CloseApp
     - SendMessageToScript
       - 如有必要可借助它(Lua)实现其他命令
@@ -152,6 +151,12 @@
   - 说明: 设置填充模式
   - ID: 202
   - 参数: [ImageFillMode](#ImageFillMode)
+* #### ZoomIn
+  - 说明: 放大
+  - ID: 203
+* #### ZoomOut
+  - 说明: 缩小
+  - ID: 204
 * #### RotateMirror
   - 说明: 旋转&镜像
   - ID: 210
@@ -163,12 +168,6 @@
   - 说明: 缩略图动作
   - ID: 230
   - 参数: [ThumbnailGridAction](#ThumbnailGridAction)
-* #### ThumbnailSizeChange
-  - 说明: 调整缩略图尺寸
-  - ID: 231
-  - 参数: `int`
-    - 举例:`4` -> 当前尺寸 `+4`
-    - 举例:`-4` -> 当前尺寸 `-4`
 * #### VideoAction
   - 说明: 视频动作
   - ID: 240
@@ -489,6 +488,12 @@
 * ##### OpenSelected
   - 说明: 打开选中项
   - ID: 8
+* ##### ZoomIn
+  - 说明: 放大
+  - ID: 9
+* ##### ZoomOut
+  - 说明: 缩小
+  - ID: 10
 </details>
 
 <details style="margin-left: 20px;" id="VideoAction" open>
@@ -610,6 +615,9 @@
 * ##### ImageTopAligned
   - 说明: 图片顶部对齐
   - ID: 31
+* ##### Crop
+  - 说明: 裁剪
+  - ID: 32
 * ##### WindowFitsImage
   - 说明: 窗口适应图片
   - ID: 35
