@@ -137,11 +137,6 @@
 * #### ShowCacheStatistics
   - Description: View cache statistics
   - ID: 140
-* #### ZoomMultiply
-  - Description: Set zoom multiplier (relative to current value)
-  - ID: 200
-  - Parameter: `double`
-    - Example: `1.1` → current zoom * 1.1
 * #### ZoomSet
   - Description: Set zoom ratio (absolute value)
   - ID: 201
