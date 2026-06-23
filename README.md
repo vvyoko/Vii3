@@ -2,8 +2,6 @@
 
 # Vii3
 > A high-performance frameless image viewer based on Avalonia, delivering ultra-smooth switching experience, comprehensive format support.
-A hobby project developed in isolation
-Created to solve the blocking issue when switching between large images
 ---
 ## Features
 - Avalonia AOT compilation for extreme startup speed
@@ -16,6 +14,8 @@ Created to solve the blocking issue when switching between large images
    - Most people don't need this, and `libmpv` is quite large, download it yourself if needed
 - Zip, Rar, Cbz, Cbr archive format support powered by SharpCompress
 - Advanced Lua scripting support powered by NLua
+- OCR Support (Testing)
+   - Need to download models according to the document
 - All interface elements can be removed to eliminate browsing distractions
 - Fully customizable keyboard shortcuts and contextmenu
 - Multi-language support can be created and updated by users
@@ -32,6 +32,8 @@ Created to solve the blocking issue when switching between large images
 ![main](images/main_2.jpeg)
 
 ![thumbnail](images/thumbnail.jpeg)
+
+![ocr](images/ocr.jpeg)
 
 ![contextmenu](images/contextmenu.jpeg)
 

@@ -56,6 +56,12 @@
     - Navigate
       - NextFolderOrArchive
       - PrevFolderOrArchive
+- Ocr
+  - 模型下载
+    - 从 `Microsoft Store` 下载 [Microsoft 照片](https://apps.microsoft.com/detail/9wzdncrfjbh4)
+    - 打开应用,打开任务管理器,右键 `照片`-`照片`, 打开文件所在位置
+    - 复制 `oneocr.dll` `oneocr.onemodel` `onnxruntime.dll` 到 `Vii3` 所在目录
+  - 在 `快捷键` - `全局` 添加新快捷键,绑定至命令 `切换` 参数 `Ocr`
 - 命令行参数
   - 以 `--` 开始的是待执行命令
     - 格式 `--命令名[=可选参数]`
@@ -86,7 +92,8 @@
   - 通用设置手动编辑选项
     - 需退出程序后编辑 `data\set.json`
     - 未在设置界面添加代表不希望普通用户去自定义
-    - `"LibMpvPath"` 参考上文
+    - `LibMpvPath` 参考上文
+    - `OneOcrDirectory` 设置OCR模型文件夹位置,复用模型,注意部分目录无权限读取如`WindowsApps`
     - `Background`
       - 用于设置软解渲染下背景颜色 `#AARRGGBB` 或 `#RRGGBB`
       - 无效值或未设置回退至 `#202020`
@@ -404,6 +411,9 @@
 * ##### Video
   - 说明: 视频
   - ID: 3
+* ##### Ocr
+  - 说明: Ocr
+  - ID: 4
 </details>
 
 <details style="margin-left: 20px;" id="CropAdjustment" open>
@@ -613,6 +623,9 @@
 * ##### Crop
   - 说明: 裁剪
   - ID: 32
+* ##### Ocr
+  - 说明: Ocr
+  - ID: 33
 * ##### WindowFitsImage
   - 说明: 窗口适应图片
   - ID: 35
@@ -693,4 +706,31 @@
   - 说明: 垂直镜像
   - ID: 5
 </details>
+
+<details style="margin-left: 20px;" id="RotateMirrorType" open>
+<summary><b>OcrAction</b></summary>
+
+* ##### SelectAll 
+  - 说明: 全选
+  - ID: 1
+* ##### ExpandCurrentSelection 
+  - 说明: 扩展选择(全选当前已有部分选中的`Box`)
+  - ID: 2
+* ##### Copy
+  - 说明: 复制
+    - 包含基础排版重组功能
+    - 遵循阅读顺序尽可能还原布局,但不保证完美复刻
+    - 字符串本身不包含布局,所以不会也不可能补充多个空格强制对齐
+    - 多 `Box` 合并至同一行以制表符 `Tab` 分隔
+    - 其余空白属于源数据中空白或单个 `Box` 未全选时兜底情况
+    - 它可抗部分倾斜以合并不处于同一水平线上的 `Box` 为同一行
+  - ID: 10
+* ##### CopyUnordered
+  - 说明: 无序复制 (按坐标位置从上到下每个一行)
+  - ID: 11
+* ##### CopyJson
+  - 说明: 复制Json (源数据)
+  - ID: 12
+</details>
+
 </details>

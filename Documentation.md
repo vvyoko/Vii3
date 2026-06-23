@@ -56,6 +56,12 @@
     - Navigate
       - NextFolderOrArchive
       - PrevFolderOrArchive
+- OCR
+  - Model Download
+    - Download [Microsoft Photos](https://apps.microsoft.com/detail/9wzdncrfjbh4) from the `Microsoft Store`.
+    - Open the app, launch `Task Manager`, right-click on `Photos` -> `Photos`, and select `Open file location`.
+    - Copy `oneocr.dll`, `oneocr.onemodel`, and `onnxruntime.dll` to the directory where `Vii3` is located.
+  - In `Hotkeys` - `Global`, add a new hotkey, bind it to the command `Toggle` with the parameter `Ocr`.
 - Command Line Arguments
   - Arguments starting with `--` are commands to be executed
     - Format: `--commandname[=optionalparameter]`
@@ -87,6 +93,7 @@
     - Requires exiting the program before editing `data\set.json`.
     - Options not included in the settings interface imply that regular users are not encouraged to customize them.
     - For `"LibMpvPath"`, please refer to the section above.
+    - `OneOcrDirectory` Set the OCR model folder location, reuse the model, and note that some directories may not have permission to read like `WindowsApps`
     - `Background`
       - Used to set the background color in software render mode using the `#AARRGGBB` or `#RRGGBB` format.
       - Invalid values or missing configurations will fallback to `#202020`.
@@ -404,6 +411,9 @@
 * ##### Video
   - Description: Video
   - ID: 3
+* ##### Ocr
+  - Description: Ocr
+  - ID: 4
 </details>
 
 <details style="margin-left: 20px;" id="CropAdjustment" open>
@@ -613,6 +623,9 @@
 * ##### Crop
   - Description: Crop
   - ID: 32
+* ##### Ocr
+  - Description: Ocr
+  - ID: 33
 * ##### WindowFitsImage
   - Description: Window fit to image
   - ID: 35
@@ -692,4 +705,31 @@
   - Description: Mirror vertical
   - ID: 5
 </details>
+
+<details style="margin-left: 20px;" id="RotateMirrorType" open>
+<summary><b>OcrAction</b></summary>
+
+* ##### SelectAll 
+  - Description: Select all
+  - ID: 1
+* ##### ExpandCurrentSelection 
+  - Description: Expand selection (select all `Box` elements currently partially selected)
+  - ID: 2
+* ##### Copy
+  - Description: Copy
+    - Includes basic text layout restructuring
+    - Attempts to restore layout based on reading order, though perfect reproduction is not guaranteed
+    - The string itself does not contain layout information, so it will not and cannot insert multiple spaces to force alignment
+    - Multiple `Boxes` merged into the same line are separated by a `Tab`
+    - Remaining whitespace refers to gaps in the source data or fallback cases where only part of a single `Box` is selected
+    - It can handle partial rotation to merge `Boxes` that are not on the same horizontal line into the same row
+  - ID: 10
+* ##### CopyUnordered
+  - Description: Copy unordered (per line, from top to bottom based on coordinates)
+  - ID: 11
+* ##### CopyJson
+  - Description: Copy JSON (raw data)
+  - ID: 12
+</details>
+
 </details>

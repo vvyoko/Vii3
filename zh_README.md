@@ -1,7 +1,5 @@
 # Vii3
 > 基于 Avalonia 的高性能图片无边框浏览器，极致流畅的切换体验，全面的格式支持。
-古法编程闭门造车之作
-为了解决大图切换时的阻塞而产生
 ---
 ## 特性
 - Avalonia AOT 编译带来极致的启动速度
@@ -14,6 +12,8 @@
    - 大部分人无此需求,且 `libmpv` 比较大 ,需要的自行下载
 - 由 SharpCompress 驱动带来 Zip，Rar, Cbz, Cbr 压缩包格式支持
 - 由 NLua 驱动带来 高级需求 lua 支持
+- OCR 支持 (测试中)
+   - 需根据文档下载相关模型
 - 界面元素可全部移除以去除对浏览的干扰
 - 快捷键，右键菜单可完全自定义
 - 多语言可由用户完成生成,更新
@@ -28,6 +28,8 @@
 ![main](images/main_zh.jpeg)
 
 ![thumbnail](images/thumbnail.jpeg)
+
+![ocr](images/ocr_zh.jpeg)
 
 ![contextmenu](images/contextmenu_zh.jpeg)
 
