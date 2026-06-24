@@ -68,11 +68,29 @@ Listen for property change events.
 - `key`: string - Property name
 - `callback`: function(newValue) - Callback function when property changes
 
+**Return Value:** Used to cancel listening
+
 **Example:**
 ```lua
 app.observe_property("Path", function(newPath)
     print("Current file path changed:", newPath)
 end)
+```
+
+---
+
+### app.unobserve_property(id)
+
+Cancels a listener property callback.
+
+**Parameters:**
+- `id`: int - Return value from observe_property
+
+**Example:**
+```lua
+local id = app.observe_property("Path", function(newPath)
+end)
+app.unobserve_property(id)
 ```
 
 ---
@@ -167,20 +185,36 @@ app.off_message("MyCustomEvent")
 
 ---
 
-### app.on_shutdown(callback)
+### app.on_event(id,callback)
 
-Register application shutdown event.
+Listening for events.
 
 **Parameters:**
-- `callback`: function() - Callback function when application shuts down
+- `id`: (string)AppEvent - event name
+- `callback`: function() - Callback function when event is triggered
 
 **Example:**
 ```lua
-app.on_shutdown(function()
+app.on_event("Shutdown", function()
     print("Application is about to close")
 end)
 ```
 
+---
+
+### app.off_event(id)
+
+Cancel the callback for a certain listening event.
+
+**Parameters**
+- `id`: int - Return value obtained from on_event
+
+**Example:**
+```lua
+local id = app.on_event("ImageLoaded", function()
+end)
+app.off_event(id)
+```
 ---
 
 ### app.send_message(target, funcName, ...)
@@ -623,7 +657,7 @@ end)
 
 timer.start()
 
-app.on_shutdown(function()
+app.on_event("Shutdown", function()
     timer.stop()
     timer.dispose()
 end)

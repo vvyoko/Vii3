@@ -732,4 +732,16 @@
   - ID: 12
 </details>
 
+
+<details style="margin-left: 20px;" id="RotateMirrorType" open>
+<summary><b>AppEvent</b></summary>
+
+* ##### Shutdown 
+  - Description: Trigger on program exit
+  - ID: 1
+* ##### ImageLoaded 
+  - Description: Triggers after each image loading is completed
+  - ID: 10
+</details>
+
 </details>

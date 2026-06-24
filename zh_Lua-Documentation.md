@@ -67,11 +67,29 @@ app.set_property("Topmost", true)
 - `key`: string - 属性名称
 - `callback`: function(newValue) - 属性变化时的回调函数
 
+**返回值：** int - 用于取消监听
+
 **示例：**
 ```lua
 app.observe_property("Path", function(newPath)
     print("当前文件路径已变更:", newPath)
 end)
+```
+
+---
+
+### app.unobserve_property(id)
+
+取消某监听属性回调。
+
+**参数：**
+- `id`: int - 从 observe_property 获取的返回值
+
+**示例：**
+```lua
+local id = app.observe_property("Path", function(newPath)
+end)
+app.unobserve_property(id)
 ```
 
 ---
@@ -166,20 +184,38 @@ app.off_message("MyCustomEvent")
 
 ---
 
-### app.on_shutdown(callback)
+### app.on_event(id,callback)
 
-注册应用关闭事件。
+监听事件。
 
 **参数：**
-- `callback`: function() - 应用关闭时的回调函数
+- `id`: (string)AppEvent - 事件名称
+- `callback`: function() - 事件触发时的回调函数
+
+**返回值：** int - 供 off_event 取消监听事件
 
 **示例：**
 ```lua
-app.on_shutdown(function()
+app.on_event("Shutdown", function()
     print("应用即将关闭")
 end)
 ```
 
+---
+
+### app.off_event(id)
+
+取消某监听事件回调。
+
+**参数：**
+- `id`: int - 从 on_event 获取的返回值
+
+**示例：**
+```lua
+local id = app.on_event("ImageLoaded", function()
+end)
+app.off_event(id)
+```
 ---
 
 ### app.send_message(target, funcName, ...)
@@ -622,7 +658,7 @@ end)
 
 timer.start()
 
-app.on_shutdown(function()
+app.on_event("Shutdown",function()
     timer.stop()
     timer.dispose()
 end)

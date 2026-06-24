@@ -733,4 +733,17 @@
   - ID: 12
 </details>
 
+
+
+<details style="margin-left: 20px;" id="RotateMirrorType" open>
+<summary><b>AppEvent</b></summary>
+
+* ##### Shutdown
+  - 说明: 程序退出触发
+  - ID: 1
+* ##### ImageLoaded
+  - 说明: 每次图片加载完成后触发
+  - ID: 10
+</details>
+
 </details>
