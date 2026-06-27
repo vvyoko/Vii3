@@ -1,4 +1,3 @@
-<details>
 <summary><h1>Lua API 文档</h1></summary>
 
 
@@ -143,6 +142,7 @@ end
   - `"Thumbnail"`: 缩略图层
   - `"Crop"`: 裁剪层
   - `"Video"`: 视频层
+  - `"Ocr"`: OCR层
 
 **示例：**
 ```lua
@@ -299,6 +299,20 @@ app.toast.show({
 **示例：**
 ```lua
 print("当前脚本ID:", env.id)
+```
+
+---
+
+
+### env.AppVersion
+
+当前程序版本。
+
+**类型：** string
+
+**示例：**
+```lua
+print("当前程序版本:", env.AppVersion)
 ```
 
 ---
@@ -615,6 +629,41 @@ print("剪贴板内容:", text)
 
 ---
 
+### utils.base64_encode(text, codepage)
+
+获取Base64编码后的文本。
+
+**参数：**
+- `text`: string - 待编码的字符串
+- `codepage`: int - 代码页id,默认默认编码为UTF-8
+
+**返回值：** string - 编码后内容
+
+**示例：**
+```lua
+local text = utils.base64_encode("hello vii3")
+print("Base64编码后文本:", text)
+```
+
+---
+
+### utils.base64_decode(text, codepage)
+
+获取Base64解码后的文本。
+
+**参数：**
+- `text`: string - 待解码的字符串
+- `codepage`: int - 代码页id,默认默认编码为UTF-8
+
+**返回值：** string - 解码后内容
+
+**示例：**
+```lua
+local text = utils.base64_decode("hello vii3")
+print("Base64解码后文本:", text)
+```
+
+---
 ## factory 模块
 
 ### factory.timer(interval, callback)
@@ -626,26 +675,30 @@ print("剪贴板内容:", text)
 - `callback`: function() - 定时触发的回调函数
 
 **返回值：** LuaTimer 对象，具有以下方法：
-- `start()`: 启动定时器
-- `stop()`: 停止定时器
-- `dispose()`: 释放定时器资源
+- `ReStart()`: 启动定时器
+- `Stop()`: 停止定时器
+- `Kill()`: 释放定时器资源
 
 **示例：**
 ```lua
 local timer = factory.timer(1000, function()
     print("每秒执行一次")
 end)
-timer.start()
+timer.ReStart()
 
 -- 5秒后停止
 utils.wait(5000, function()
-    timer.stop()
-    timer.dispose()
+    timer.Stop()
+    timer.Kill()
 end)
 ```
 
 ---
 
+## print
+- 参数遵循lua原本定义
+- 结果重定向至 日志-信息
+---
 ## 使用示例
 
 ### 示例1：创建一个简单的定时器脚本
@@ -656,11 +709,11 @@ local timer = factory.timer(2000, function()
     app.toast.info("当前文件: " .. path, "file_watcher", 1500)
 end)
 
-timer.start()
+timer.ReStart()
 
 app.on_event("Shutdown",function()
-    timer.stop()
-    timer.dispose()
+    timer.Stop()
+    timer.Kill()
 end)
 ```
 
@@ -693,4 +746,3 @@ end)
 -- 在 ScriptB.lua 中
 app.send_message("ScriptA", "custom_event", "Hello from ScriptB")
 ```
-</details>

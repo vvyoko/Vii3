@@ -1,6 +1,4 @@
-<details>
-<summary><h1>Lua API Documentation</h1>
-</summary>
+<summary><h1>Lua API Documentation</h1></summary>
 
 
 Vii3 provides a complete Lua scripting interface, allowing users to extend application functionality through scripts.
@@ -144,7 +142,8 @@ Register key binding.
   - `"Thumbnail"`: Thumbnail layer
   - `"Crop"`: Crop layer
   - `"Video"`: Video layer
-
+  - `"Ocr"`: OCR layer
+  
 **Example:**
 ```lua
 app.add_key_binding("Ctrl+Shift+S", function()
@@ -302,6 +301,18 @@ print("Current script ID:", env.id)
 
 ---
 
+### env.AppVersion
+
+Current program version.
+
+**Type:** string
+
+**Example:**
+```lua
+print("Current program version:", env.AppVersion)
+```
+
+---
 ### env.ScriptsDir
 
 Scripts directory path.
@@ -614,6 +625,42 @@ print("Clipboard content:", text)
 
 ---
 
+### utils.base64_encode(text, codepage)
+
+Get Base64 encoded text.
+
+**Parameters:**
+- `text`: string - The string to encode.
+- `codepage`: int - Codepage ID. The default encoding is UTF-8.
+
+**Return Value:** string - Encoded content.
+
+**Example:**
+```lua
+local text = utils.base64_encode("hello vii3")
+print("Base64 encoded text:", text)
+```
+
+---
+
+### utils.base64_decode(text, codepage)
+
+Get Base64 decoded text.
+
+**Parameters:**
+- `text`: string - The string to be decoded.
+- `codepage`: int - Codepage ID. The default encoding is UTF-8.
+
+**Return Value:** string - Decoded content.
+
+**Example:**
+```lua
+local text = utils.base64_decode("hello vii3")
+print("Base64 decoded text:", text)
+```
+
+---
+
 ## factory Module
 
 ### factory.timer(interval, callback)
@@ -625,24 +672,28 @@ Create a timer.
 - `callback`: function() - Callback function to trigger periodically
 
 **Return Value:** LuaTimer object with the following methods:
-- `start()`: Start timer
-- `stop()`: Stop timer
-- `dispose()`: Release timer resources
+- `ReStart()`: Start timer
+- `Stop()`: Stop timer
+- `Kill()`: Release timer resources
 
 **Example:**
 ```lua
 local timer = factory.timer(1000, function()
     print("Execute once per second")
 end)
-timer.start()
+timer.ReStart()
 
 -- Stop after 5 seconds
 utils.wait(5000, function()
-    timer.stop()
-    timer.dispose()
+    timer.Stop()
+    timer.Kill()
 end)
 ```
 
+---
+## print
+- parameters follow the original definition of lua
+- Results redirect to Log-Info
 ---
 
 ## Usage Examples
@@ -655,11 +706,11 @@ local timer = factory.timer(2000, function()
     app.toast.info("Current file: " .. path, "file_watcher", 1500)
 end)
 
-timer.start()
+timer.ReStart()
 
 app.on_event("Shutdown", function()
-    timer.stop()
-    timer.dispose()
+    timer.Stop()
+    timer.Kill()
 end)
 ```
 
