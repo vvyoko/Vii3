@@ -1,3 +1,5 @@
+-- 要求程序版本 3.1.18
+
 -- 用于其他程序调用 Vii3 OCR指定图片
 -- 其他程序生成或设置某张图片，然后通过命令行调用
 -- 如果全新启动每次都会加载模型，它比较耗时
@@ -16,16 +18,6 @@ local requestVersion = 0
 local imageLoadedVersion = 0
 local isOcrPending = false
 local coldStartTimer = nil
-
-app.on_event("ImageLoaded", function()
-    imageLoadedVersion = imageLoadedVersion + 1
-    if isOcrPending then
-        if imageLoadedVersion >= requestVersion then
-            app.command("Toggle", "Ocr")
-        end
-        isOcrPending = false
-    end
-end)
 
 app.on_message("Request", function()
     isOcrPending = true
@@ -63,6 +55,15 @@ app.on_message("Request", function()
     end
 end)
 
+app.on_event("ImageLoaded", function()
+    imageLoadedVersion = imageLoadedVersion + 1
+    if isOcrPending then
+        if imageLoadedVersion >= requestVersion then
+            app.command("Toggle", "Ocr")
+        end
+        isOcrPending = false
+    end
+end)
 
 -- Vii3.exe --SendMessageToScript="Ocr Request" “图片路径”
 -- 命令行如上,它的作用是先请求,再加载图片

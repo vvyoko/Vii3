@@ -490,64 +490,6 @@ local uniquePath = utils.path_get_unique("C:\\Files\\output.jpg", true)
 
 ---
 
-### utils.str_lower(str)
-
-转换为小写。
-
-**参数：**
-- `str`: string - 输入字符串
-
-**返回值：** string - 小写字符串
-
----
-
-### utils.str_upper(str)
-
-转换为大写。
-
-**参数：**
-- `str`: string - 输入字符串
-
-**返回值：** string - 大写字符串
-
----
-
-### utils.str_trim(str)
-
-去除首尾空白字符。
-
-**参数：**
-- `str`: string - 输入字符串
-
-**返回值：** string - 处理后的字符串
-
----
-
-### utils.str_replace(str, old, new)
-
-替换字符串。
-
-**参数：**
-- `str`: string - 原始字符串
-- `old`: string - 要替换的子串
-- `new`: string - 新字符串
-
-**返回值：** string - 替换后的字符串
-
----
-
-### utils.str_contains(str, value)
-
-检查字符串是否包含指定子串。
-
-**参数：**
-- `str`: string - 原始字符串
-- `value`: string - 要查找的子串
-
-**返回值：** boolean - 是否包含
-
----
-
 ### utils.regex_match(haystack, needle)
 
 正则表达式匹配。
@@ -664,6 +606,53 @@ print("Base64解码后文本:", text)
 ```
 
 ---
+
+## utils.get_time()
+
+获取当前UTC时间戳（毫秒级Unix时间）
+
+**返回值：**
+- `long`：UTC时间从Unix纪元起的总毫秒数
+
+---
+
+## utils.reg_write(name, value)
+
+写入当前脚本专属注册表项，内部统一以带类型前缀的字符串(REG_SZ)存储数据
+
+**参数：**
+- `name`: string - 注册表项名称
+- `value`: any - 待写入值，支持类型：字符串、布尔、double、int、long、字节数组，其他类型自动转为字符串存储
+
+**返回值：**
+- `bool`：写入成功返回true，发生异常/创建键失败返回false
+
+---
+
+## utils.reg_read(name)
+
+读取当前脚本专属注册表项，自动解析内部存储的类型前缀并还原原始数据
+
+**参数：**
+- `name`: string - 注册表项名称
+
+**返回值：**
+- `object?`：读取成功返回还原后对应类型的值；键不存在、取值异常返回nil；无类型前缀原始字符串直接原样返回
+
+---
+
+## utils.reg_delete(name)
+
+删除当前脚本专属指定注册表项
+
+**参数：**
+- `name`: string - 注册表项名称
+
+**返回值：**
+- `bool`：删除成功/该项原本不存在返回true；操作异常返回false
+
+---
+
 ## factory 模块
 
 ### factory.timer(interval, callback)

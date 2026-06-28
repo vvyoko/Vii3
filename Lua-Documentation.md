@@ -486,64 +486,6 @@ local uniquePath = utils.path_get_unique("C:\\Files\\output.jpg", true)
 
 ---
 
-### utils.str_lower(str)
-
-Convert to lowercase.
-
-**Parameters:**
-- `str`: string - Input string
-
-**Return Value:** string - Lowercase string
-
----
-
-### utils.str_upper(str)
-
-Convert to uppercase.
-
-**Parameters:**
-- `str`: string - Input string
-
-**Return Value:** string - Uppercase string
-
----
-
-### utils.str_trim(str)
-
-Trim leading and trailing whitespace.
-
-**Parameters:**
-- `str`: string - Input string
-
-**Return Value:** string - Trimmed string
-
----
-
-### utils.str_replace(str, old, new)
-
-Replace string.
-
-**Parameters:**
-- `str`: string - Original string
-- `old`: string - String to replace
-- `new`: string - New string
-
-**Return Value:** string - Replaced string
-
----
-
-### utils.str_contains(str, value)
-
-Check if string contains specified substring.
-
-**Parameters:**
-- `str`: string - Original string
-- `value`: string - Substring to find
-
-**Return Value:** boolean - Whether it contains
-
----
-
 ### utils.regex_match(haystack, needle)
 
 Regular expression match.
@@ -658,6 +600,52 @@ Get Base64 decoded text.
 local text = utils.base64_decode("hello vii3")
 print("Base64 decoded text:", text)
 ```
+
+---
+
+### utils.get_time()
+
+Get current UTC Unix timestamp in milliseconds
+
+**Return Value:**
+- `long`: Total milliseconds elapsed from Unix epoch in UTC
+
+---
+
+### utils.reg_write(name, value)
+
+Write value to registry entry exclusive to current script. All data is internally stored as REG_SZ string with type prefix
+
+**Parameters:**
+- `name`: string - Registry value name
+- `value`: any - Value to write. Supported types: string, boolean, double, int, long, byte array. Other types will be automatically converted to string for storage
+
+**Return Value:**
+- `bool`: Returns true if write succeeds; returns false on exception or key creation failure
+
+---
+
+### utils.reg_read(name)
+
+Read registry entry exclusive to current script, automatically parse internal type prefix and restore original data type
+
+**Parameters:**
+- `name`: string - Registry value name
+
+**Return Value:**
+- `object?`: Restored value with corresponding data type on successful read; returns nil if key not found or read error occurs; raw string will be returned directly if no type prefix exists
+
+---
+
+### utils.reg_delete(name)
+
+Delete specified registry entry exclusive to current script
+
+**Parameters:**
+- `name`: string - Registry value name
+
+**Return Value:**
+- `bool`: Returns true if deletion succeeds or target value does not exist originally; returns false when operation throws exception
 
 ---
 
