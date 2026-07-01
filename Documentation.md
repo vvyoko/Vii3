@@ -144,6 +144,11 @@
 * #### ShowCacheStatistics
   - Description: View cache statistics
   - ID: 140
+* #### LoadFiles
+  - Description:LoadFiles
+  - ID: 190
+  - Parameter: string[]
+  - Internal property
 * #### ZoomSet
   - Description: Set zoom ratio (absolute value)
   - ID: 201
@@ -296,25 +301,24 @@
   - Parameter: ([ImageFillMode](#ImageFillMode))
     - Example: `FillWindow,FitWindow`
 </details>
-
 <details style="margin-left: 20px;" open>
 <summary><b>Properties</b></summary>
 
-* #### SortField
+* #### None
+  - Description: None
+  - ID: 0
+  - Type: -
+* #### SortMode
   - Description: Sort type
   - ID: 1
   - Type: [SortField](#SortField)
-* #### SortDescend
+* #### IsSortDescend
   - Description: Sort descending
-  - ID: 2
+  - ID: 30
   - Type: bool
-* #### FillMode
-  - Description: Fill mode
-  - ID: 3
-  - Type: [ImageFillMode](#ImageFillMode)
 * #### IsFolderLooping
   - Description: Folder looping
-  - ID: 4
+  - ID: 31
   - Type: bool
 * #### WindowState
   - Description: Window state
@@ -324,76 +328,108 @@
     - Minimized
     - Maximized
     - FullScreen
-* #### Topmost
-  - Description: Window topmost state
-  - ID: 101
-  - Type: bool
-* #### IsImageInfoEnabled
-  - Description: Enable image info
-  - ID: 110
-  - Type: bool
-* #### IsTitleEnabled
-  - Description: Enable title
-  - ID: 112
-  - Type: bool
-* #### IsThumbnailActive
-  - Description: Thumbnail active
-  - ID: 113
+* #### IsWindowTopmost
+  - Description: Is Window Topmost
+  - ID: 130
   - Type: bool
 * #### IsWindowLocked
-  - Description: Window locked
-  - ID: 114
+  - Description: Is Window locked
+  - ID: 131
   - Type: bool
-* #### Rotation
-  - Description: Rotation angle
+* #### IsWindowFitsImage
+  - Description: Is window fit to image Enable
+  - ID: 160
+  - Type: bool
+* #### IsTitleVisible
+  - Description: Is Title Visible
   - ID: 200
-  - Type: double
-  - Valid values: 0, 90, 180, 270
-* #### Mirror
-  - Description: Mirror
+  - Type: bool
+* #### IsImageInfoVisible
+  - Description: Is Image Info Visible
   - ID: 201
+  - Type: bool
+* #### IsThumbnailVisible
+  - Description: Is Thumbnail Visible
+  - ID: 202
+  - Type: bool
+* #### IsMiniMapEnabled
+  - Description: Is MiniMap Enabled
+  - ID: 230
+  - Type: bool
+* #### IsSideArrowEnabled
+  - Description: Is Side Arrow Enabled
+  - ID: 231
+  - Type: bool
+* #### IsBottomButtonsEnabled
+  - Description: Is Bottom Buttons Enabled
+  - ID: 232
+  - Type: bool
+* #### IsInCropMode
+  - Description: In crop mode
+  - ID: 260
+  - Type: bool
+* #### IsInOcrMode
+  - Description: In OCR mode
+  - ID: 261
+  - Type: bool
+* #### FillMode
+  - Description: Fill mode
+  - ID: 500
+  - Type: [ImageFillMode](#ImageFillMode)
+* #### MirrorMode
+  - Description: Mirror
+  - ID: 501
   - Type: ImageMirrorMode
     - None
     - Horizontal
     - Vertical
-* #### Zoom
+* #### ZoomFactor
   - Description: Zoom ratio
-  - ID: 202
+  - ID: 530
   - Type: double
   - Valid values: 0.1-10.0
+* #### RotateAngle
+  - Description: Rotation angle
+  - ID: 531
+  - Type: double
+  - Valid values: 0, 90, 180, 270
 * #### CropRatio
   - Description: Crop ratio
-  - ID: 203
+  - ID: 533
   - Type: double
   - Valid values:
     - `-2.0` → toggle crop mode
     - `-1.0` → close crop
     - `≥0` → enable and set crop ratio
-* #### IsCropMode
-  - Description: In crop mode
-  - ID: 210
-  - Type: bool
-* #### IsMiniMapEnabled
-  - Description: Enable mini map
-  - ID: 220
-  - Type: bool
-* #### IsWindowFitsImageEnabled
-  - Description: Enable window fit to image
-  - ID: 221
-  - Type: bool
-* #### IsSideArrowEnabled
-  - Description: Enable side arrow
-  - ID: 222
-  - Type: bool
-* #### IsBottomButtonsEnabled
-  - Description: Enable bottom bar
-  - ID: 223
+* #### IsImageTopAligned
+  - Description: Is image aligned to top
+  - ID: 560
   - Type: bool
 * #### Path
   - Description: Current file path
   - ID: 1000
   - Type: string
   - Not writable
+* #### HasImage
+  - Description: Has loaded image
+  - ID: 1010
+  - Type: bool
+  - Internal property
+* #### HasFile
+  - Description: Has valid file
+  - ID: 1011
+  - Type: bool
+  - Internal property
+* #### FileCount
+  - Description: Total file count
+  - ID: 1012
+  - Type: int
+  - Internal property
+* #### CanNavigate
+  - Description: Allow prev/next navigation
+  - ID: 1013
+  - Type: bool
+  - Internal property
 </details>
 
 <details style="margin-left: 20px;" id="InputLayer" open>

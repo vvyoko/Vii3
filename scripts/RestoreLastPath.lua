@@ -2,8 +2,8 @@
 
 -- 恢复上次关闭前最后打开的路径
 -- 压缩包内文件会保存为压缩包本体
--- 存在上次打开文件时绑定快捷键 F13
--- 它会覆盖配置中的用户定义快捷键中的F3
+-- 存在上次打开文件时绑定快捷键 F3
+-- 它会覆盖配置中的用户定义快捷键中的 F3
 -- 如此键但冲突,可更改为其他不冲突键
 
 local app = require 'app'
@@ -19,6 +19,7 @@ if lastPath and key and #key > 0 then
     local isExist = utils.path_get_unique(lastPath) ~= lastPath
     if isExist then
         app.add_key_binding(key, function()
+            --此命令要求参数 string[],用 table {路径1,路径2} 传过去
             app.command("LoadFiles", { lastPath })
         end)
     end

@@ -144,6 +144,11 @@
 * #### ShowCacheStatistics
   - 说明: 查看缓存统计
   - ID: 140
+* #### LoadFiles
+  - 说明: 加载文件
+  - ID: 190
+  - 参数: string[]
+  - 内部属性
 * #### ZoomSet
   - 说明: 设置缩放比例（绝对数值）
   - ID: 201
@@ -296,25 +301,24 @@
   - 参数: ([ImageFillMode](#ImageFillMode))
     -  示例: `FillWindow,FitWindow`
 </details>
-
 <details style="margin-left: 20px;" open>
 <summary><b>属性</b></summary>
 
-* #### SortField
+* #### None
+  - 说明: 无
+  - ID: 0
+  - 类型: -
+* #### SortMode
   - 说明: 排序类型
   - ID: 1
   - 类型: [SortField](#SortField)
-* #### SortDescend
-  - 说明: 是否降序
-  - ID: 2
+* #### IsSortDescend
+  - 说明: 是否逆序
+  - ID: 30
   - 类型: bool
-* #### FillMode
-  - 说明: 填充模式
-  - ID: 3
-  - 类型: [ImageFillMode](#ImageFillMode)
 * #### IsFolderLooping
-  - 说明: 文件夹循环
-  - ID: 4
+  - 说明: 文件夹是否循环
+  - ID: 31
   - 类型: bool
 * #### WindowState
   - 说明: 窗口状态
@@ -324,76 +328,108 @@
     - Minimized
     - Maximized
     - FullScreen
-* #### Topmost
-  - 说明: 窗口置顶状态
-  - ID: 101
-  - 类型: bool
-* #### IsImageInfoEnabled
-  - 说明: 是否启用图片信息
-  - ID: 110
-  - 类型: bool
-* #### IsTitleEnabled
-  - 说明: 是否启用标题
-  - ID: 112
-  - 类型: bool
-* #### IsThumbnailActive
-  - 说明: 缩略图是否激活
-  - ID: 113
+* #### IsWindowTopmost
+  - 说明: 窗口是否置顶
+  - ID: 130
   - 类型: bool
 * #### IsWindowLocked
-  - 说明: 是否锁定窗口
-  - ID: 114
+  - 说明: 窗口是否锁定
+  - ID: 131
   - 类型: bool
-* #### Rotation
-  - 说明: 旋转角度
+* #### IsWindowFitsImage
+  - 说明: 窗口是否适应图片
+  - ID: 160
+  - 类型: bool
+* #### IsTitleVisible
+  - 说明: 标题是否显示
   - ID: 200
-  - 类型: double
-  - 合法值: 0, 90, 180, 270
-* #### Mirror
-  - 说明: 镜像
+  - 类型: bool
+* #### IsImageInfoVisible
+  - 说明: 图片信息是否显示
   - ID: 201
+  - 类型: bool
+* #### IsThumbnailVisible
+  - 说明: 缩略图是否显示
+  - ID: 202
+  - 类型: bool
+* #### IsMiniMapEnabled
+  - 说明: 迷你地图是否启用
+  - ID: 230
+  - 类型: bool
+* #### IsSideArrowEnabled
+  - 说明: 侧边方向键是否启用
+  - ID: 231
+  - 类型: bool
+* #### IsBottomButtonsEnabled
+  - 说明: 底部操作栏是否启用
+  - ID: 232
+  - 类型: bool
+* #### IsInCropMode
+  - 说明: 是否处于裁剪模式
+  - ID: 260
+  - 类型: bool
+* #### IsInOcrMode
+  - 说明: 是否处于Ocr模式
+  - ID: 261
+  - 类型: bool
+* #### FillMode
+  - 说明: 填充模式
+  - ID: 500
+  - 类型: [ImageFillMode](#ImageFillMode)
+* #### MirrorMode
+  - 说明: 镜像模式
+  - ID: 501
   - 类型: ImageMirrorMode
     - None
     - Horizontal
     - Vertical
-* #### Zoom
+* #### ZoomFactor
   - 说明: 缩放比例
-  - ID: 202
+  - ID: 530
   - 类型: double
   - 合法值: 0.1-10.0
+* #### RotateAngle
+  - 说明: 旋转角度
+  - ID: 531
+  - 类型: double
+  - 合法值: 0, 90, 180, 270
 * #### CropRatio
   - 说明: 裁剪比例
-  - ID: 203
+  - ID: 533
   - 类型: double
   - 合法值:
     - `-2.0` -> 切换裁剪模式
     - `-1.0` -> 关闭裁剪
     - `≥0` -> 开启并设裁剪比例
-* #### IsCropMode
-  - 说明: 是否处于裁剪模式
-  - ID: 210
-  - 类型: bool
-* #### IsMiniMapEnabled
-  - 说明: 是否启用迷你地图
-  - ID: 220
-  - 类型: bool
-* #### IsWindowFitsImageEnabled
-  - 说明: 是否启用窗口适应图片
-  - ID: 221
-  - 类型: bool
-* #### IsSideArrowEnabled
-  - 说明: 是否启用侧边箭头
-  - ID: 222
-  - 类型: bool
-* #### IsBottomButtonsEnabled
-  - 说明: 是否启用底部操作栏
-  - ID: 223
+* #### IsImageTopAligned
+  - 说明: 图片是否对齐顶部
+  - ID: 560
   - 类型: bool
 * #### Path
   - 说明: 当前文件路径
   - ID: 1000
   - 类型: string
   - 不可写
+* #### HasImage
+  - 说明: 是否存在图片
+  - ID: 1010
+  - 类型: bool
+  - 内部属性
+* #### HasFile
+  - 说明: 是否存在文件
+  - ID: 1011
+  - 类型: bool
+  - 内部属性
+* #### FileCount
+  - 说明: 文件总数
+  - ID: 1012
+  - 类型: int
+  - 内部属性
+* #### CanNavigate
+  - 说明: 是否可以上下翻页导航
+  - ID: 1013
+  - 类型: bool
+  - 内部属性
 </details>
 
 <details style="margin-left: 20px;" id="InputLayer" open>

@@ -26,10 +26,10 @@ local originalState = nil
 
 -- 【目标状态表】定义清洁模式下，每个属性“应该是”什么样子
 local TARGET_STATE = {
-    IsImageInfoEnabled       = false,
-    IsTitleEnabled           = false,
-    Topmost                  = true,
-    IsWindowFitsImageEnabled = true
+    IsImageInfoVisible       = false,
+    IsTitleVisible           = false,
+    IsWindowTopmost                  = true,
+    IsWindowFitsImage = true
 }
 
 local function ToggleCleanMode()

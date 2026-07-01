@@ -18,8 +18,8 @@ local DEFAULT_INTERVAL = 5000
 local SLIDESHOW_STATE = {
     WindowState    = "FullScreen",
     FillMode       = "FillWindow",
-    IsTitleEnabled = false,
-    IsImageInfoEnabled  = false
+    IsTitleVisible = false,
+    IsImageInfoVisible  = false
 }
 
 -- 定时器
@@ -102,7 +102,7 @@ end)
 app.add_key_binding("F2", CycleSlideshow)
 
 -- 自动停止
-app.observe_property("IsThumbnailActive", function(newVal)
+app.observe_property("IsThumbnailVisible", function(newVal)
     if newVal and isSlideshowRunning then
         stopSlideshow()
     end
