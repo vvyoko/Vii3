@@ -1,9 +1,7 @@
 - **Large Image Loading Issues**
    - Framework limitation: each image can only occupy 2GB of memory
-   - `SkiaSharp` supports subsampled decoding
-      - Tries to load the maximum supported resolution
-      - Supported formats: `.bmp`, `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.ico`, `.wbmp`
-  - `Magick.Net` does not support this
+   - `Skia` or `WIC` Tries to load the maximum supported resolution
+   - `Magick.Net` does not support this
       - To load, you need to load the original image first then scale
       - The entire process takes very long, so it's abandoned
 
@@ -34,12 +32,6 @@
   - Given that an optional **libmpv** solution exists, no other specialized libraries will be introduced to handle this.
   - If there is a high demand for **Avif animations**, please refer to the documentation to download **libmpv**.
     - **libmpv** is a professional video processing library that excels at handling video formats.
-
-- ### Register for Folders / Archives Context Menu
-  - Associated targets: Folders, ZIP, RAR, CBR, CBZ
-  - Except for folders, all other formats require setting a default opening program beforehand; re-association may be needed if the default opening method is changed
-  - Users of third-party file managers are recommended to implement this feature on their own (refer to documentation for passing single or multiple file paths via command line)
-  - Alternative options: use dedicated Context Menu customization tools such as `ContextMenuManager`, `ContextMenuForWindows11`, etc.
 
 - ### Window Flicker with Window Fit To Image
   - Window auto-sizing essentially triggers window resizing operations fully controlled by the system; no custom handling can be implemented at the application layer
@@ -80,8 +72,6 @@
 - **ICO is a Container Format, the Image Info Detection Shows Png is Correct Behavior**
 
 - **Avalonia Version Stuck at 11**
-  - Version 12 removed the core property `ExtendClientAreaChromeHints` that the program depends on
-  - Various attempts were made but still unable to resolve
-
-- **Image Failure Info Appears in Thumbnail Interface**
-  - Extreme case, please switch to next image
+  - Suspected sharp performance drop without any code changes
+    - Replaced core dependency property `ExtendClientAreaChromeHints` with `None`
+    - Replaced all deprecated methods with recommended alternatives
