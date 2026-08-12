@@ -179,20 +179,20 @@
   - 说明: 视频动作
   - ID: 240
   - 参数: [VideoAction](#VideoAction)
-* #### CropSet
-  - 说明: 设置裁剪模式
+* #### SelectorSet
+  - 说明: 设置选择器
   - ID: 300
   - 参数: `double` 
-    - `-2.0` -> 切换裁剪模式
-    - `-1.0` -> 关闭裁剪
-    - `≥0` -> 开启并设裁剪比例
+    - `-2.0` -> 切换选择器
+    - `-1.0` -> 关闭选择器
+    - `≥0` -> 开启并设选择比例
 * #### CropSave
   - 说明: 保存当前裁剪区域
   - ID: 301
-* #### CropAdjustAction
-  - 说明: 裁剪选框调整
+* #### SelectorAdjustAction
+  - 说明: 选框调整
   - ID: 305
-  - 参数: [CropAdjustment](#CropAdjustment)
+  - 参数: [SelectorAdjustment](#SelectorAdjustment)
 * #### RotateMirrorSave
   - 说明: 保存旋转镜像
   - ID: 310
@@ -452,20 +452,20 @@
   - ID: 4
 </details>
 
-<details style="margin-left: 20px;" id="CropAdjustment" open>
-<summary><b>CropAdjustment</b></summary>
+<details style="margin-left: 20px;" id="SelectorAdjustment" open>
+<summary><b>SelectorAdjustment</b></summary>
 
 * ##### MoveUp
-  - 说明: 裁剪框上移
+  - 说明: 选框上移
   - ID: 0
 * ##### MoveDown
-  - 说明: 裁剪框下移
+  - 说明: 选框下移
   - ID: 1
 * ##### MoveLeft
-  - 说明: 裁剪框左移
+  - 说明: 选框左移
   - ID: 2
 * ##### MoveRight
-  - 说明: 裁剪框右移
+  - 说明: 选框右移
   - ID: 3
 * ##### EnlargeTop
   - 说明: 上边缘放大
@@ -491,11 +491,11 @@
 * ##### ShrinkRight
   - 说明: 右边缘缩小
   - ID: 11
-* ##### FitToImage
-  - 说明: 适配图片范围 (全选)
+* ##### SelectAll
+  - 说明: 全选
   - ID: 12
 * ##### ResetCrop
-  - 说明: 重置裁剪框
+  - 说明: 重置选框
   - ID: 13
 </details>
 

@@ -179,20 +179,20 @@
   - Description: Video action
   - ID: 240
   - Parameter: [VideoAction](#VideoAction)
-* #### CropSet
-  - Description: Set crop mode
+* #### SelectorSet
+  - Description: Set Selector
   - ID: 300
   - Parameter: `double`
-    - `-2.0` → toggle crop mode
-    - `-1.0` → close crop
-    - `≥0` → enable and set crop ratio
+    - `-2.0` → toggle selector
+    - `-1.0` → close selector
+    - `≥0` → enable and set select ratio
 * #### CropSave
   - Description: Save current crop area
   - ID: 301
-* #### CropAdjustAction
-  - Description: Crop selection adjustment
+* #### SelectorAdjustAction
+  - Description: Selection adjustment
   - ID: 305
-  - Parameter: [CropAdjustment](#CropAdjustment)
+  - Parameter: [SelectorAdjustment](#SelectorAdjustment)
 * #### RotateMirrorSave
   - Description: Save rotation/mirror
   - ID: 310
@@ -452,20 +452,20 @@
   - ID: 4
 </details>
 
-<details style="margin-left: 20px;" id="CropAdjustment" open>
-<summary><b>CropAdjustment</b></summary>
+<details style="margin-left: 20px;" id="SelectorAdjustment" open>
+<summary><b>SelectorAdjustment</b></summary>
 
 * ##### MoveUp
-  - Description: Move crop box up
+  - Description: Move selection box up
   - ID: 0
 * ##### MoveDown
-  - Description: Move crop box down
+  - Description: Move selection box down
   - ID: 1
 * ##### MoveLeft
-  - Description: Move crop box left
+  - Description: Move selection box left
   - ID: 2
 * ##### MoveRight
-  - Description: Move crop box right
+  - Description: Move selection box right
   - ID: 3
 * ##### EnlargeTop
   - Description: Enlarge top edge
@@ -491,8 +491,8 @@
 * ##### ShrinkRight
   - Description: Shrink right edge
   - ID: 11
-* ##### FitToImage
-  - Description: Fit to image range (select all)
+* ##### SelectAll
+  - Description: Select all
   - ID: 12
 * ##### ResetCrop
   - Description: Reset crop box
