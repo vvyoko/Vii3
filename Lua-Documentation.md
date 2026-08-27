@@ -485,36 +485,71 @@ local uniquePath = utils.path_get_unique("C:\\Files\\output.jpg", true)
 ```
 
 ---
-
 ### utils.regex_match(haystack, needle)
 
 Regular expression match.
 
 **Parameters:**
 - `haystack`: string - String to search
-- `needle`: string - Regular expression pattern
+- `needle`: string - Regular expression pattern (Perl-compatible)
 
-**Return Value:** Match result object `{ index = number, match = table }`
-- `index`: number - Match position (starting from 1), 0 means no match
-- `match`: table - Match details
-  - `[0]`, `[1]`, ...: Capture group contents
-  - `["name"]`: Named capture group content
-  - `Value`: Table of all capture group values
-  - `Pos`: Table of all capture group positions
-  - `Len`: Table of all capture group lengths
-  - `Count`: Number of capture groups
+**Return Value:**
+- On success: Returns a `MatchInfo` object
+- On failure: Returns `nil`
 
-**Example:**
+**MatchInfo Object Properties:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `[0]` | string | The entire match text |
+| `[1]`, `[2]`, ... | string | Capture group contents (indexed by number) |
+| `["name"]` | string | Named capture group content (if any) |
+| `Count` | number | Total number of capture groups (excluding the overall match) |
+| `Position` | number | Starting position of the entire match (1-based) |
+| `Pos` | table | Position table for all capture groups (1-based) |
+| `Len` | table | Length table for all capture groups |
+
+**Pos/Len Table Indexing Rules:**
+- `Pos[0]` / `Len[0]`: Position/length of the overall match
+- `Pos[1]` / `Len[1]`: Position/length of the 1st capture group
+- `Pos["name"]` / `Len["name"]`: Position/length of a named capture group
+
+**Examples:**
+
 ```lua
-local result = utils.regex_match("Hello World 123", "World (\\d+)")
-if result.index > 0 then
-    print("Match position:", result.index)
-    print("Capture group 1:", result.match[1])
+-- Basic match
+local m = utils.regex_match("Hello World 123", "World (\\d+)")
+if m then
+    print("Match position:", m.Position)        -- 7
+    print("Overall match:", m[0])               -- "World 123"
+    print("Capture group 1:", m[1])             -- "123"
+    print("Number of groups:", m.Count)         -- 1
+end
+
+-- Named capture groups
+local m = utils.regex_match("2026-08-20", "(?P<year>\\d{4})-(?P<month>\\d{2})")
+if m then
+    print(m["year"])                            -- "2026"
+    print(m["month"])                           -- "08"
+    print("Year position:", m.Pos["year"])      -- 1
+    print("Year length:", m.Len["year"])        -- 4
+end
+
+-- Iterate over all capture groups
+local m = utils.regex_match("abc123def", "(\\w+)(\\d+)")
+if m then
+    for i = 0, m.Count do
+        print(string.format("Group %d: '%s' (position: %d, length: %d)",
+            i, m[i], m.Pos[i], m.Len[i]))
+    end
+    -- Output:
+    -- Group 0: 'abc123' (position: 1, length: 6)
+    -- Group 1: 'abc' (position: 1, length: 3)
+    -- Group 2: '123' (position: 4, length: 3)
 end
 ```
 
 ---
-
 ### utils.regex_replace(haystack, needle, replacement, limit, startingPos)
 
 Regular expression replace.
@@ -525,16 +560,30 @@ Regular expression replace.
 - `replacement`: string - Replacement string
 - `limit`: number (optional) - Maximum replacement count, default -1 (unlimited)
 - `startingPos`: number (optional) - Starting position, default 1
+  - Positive: start from the Nth character from the beginning (1 = first character)
+  - Negative: start from the Nth character from the end (-1 = last character)
+  - 0: start from the beginning
 
-**Return Value:** Replacement result object `{ result = string, count = number }`
+**Return Value:** Returns two values
 - `result`: string - Replaced string
-- `count`: number - Replacement count
+- `count`: number - Actual replacement count
 
 **Example:**
 ```lua
-local result = utils.regex_replace("aabbcc", "b", "x", 1)
--- result.result = "aaxbcc"
--- result.count = 1
+-- Basic replacement
+local result, count = utils.regex_replace("aabbcc", "b", "x", 1)
+-- result = "aaxbcc"
+-- count = 1
+
+-- Replace starting from a specific position
+local result, count = utils.regex_replace("aabbcc", "b", "x", -1, 3)
+-- Start from the 3rd character, replace all 'b's
+-- result = "aabxcc"
+
+-- Unlimited replacement
+local result, count = utils.regex_replace("aabbcc", "b", "x")
+-- result = "aaxxcc"
+-- count = 2
 ```
 
 ---

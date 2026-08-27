@@ -1,6 +1,7 @@
 -- 要求程序版本 3.1.18
 
 -- 简单幻灯片,支持自定义切换时间
+-- 默认绑定快捷键F2
 
 -- 快捷键或菜单绑定方法
 -- 命令 - 向脚本发送消息
@@ -18,13 +19,14 @@ local DEFAULT_INTERVAL = 5000
 local SLIDESHOW_STATE = {
     WindowState    = "FullScreen",
     FillMode       = "FillWindow",
+    SortMode       = "Random",
     IsTitleVisible = false,
     IsImageInfoVisible  = false
 }
 
 -- 定时器
 local timer = factory.timer(DEFAULT_INTERVAL, function()
-    app.command("Navigate", "Random")
+    app.command("Navigate", "Next")
 end)
 timer:Stop()
 

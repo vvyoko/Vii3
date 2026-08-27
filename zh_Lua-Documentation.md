@@ -496,24 +496,61 @@ local uniquePath = utils.path_get_unique("C:\\Files\\output.jpg", true)
 
 **参数：**
 - `haystack`: string - 要搜索的字符串
-- `needle`: string - 正则表达式模式
+- `needle`: string - 正则表达式模式（兼容 Perl 正则表达式）
 
-**返回值：** 匹配结果对象 `{ index = number, match = table }`
-- `index`: number - 匹配位置（从1开始），0表示未匹配
-- `match`: table - 匹配详情
-  - `[0]`, `[1]`, ...: 捕获组内容
-  - `["name"]`: 命名捕获组内容
-  - `Value`: 所有捕获组值的表
-  - `Pos`: 所有捕获组位置的表
-  - `Len`: 所有捕获组长度的表
-  - `Count`: 捕获组数量
+**返回值：** 
+- 匹配成功：返回匹配结果对象 `MatchInfo`
+- 匹配失败：返回 `nil`
+
+**MatchInfo 对象属性：**
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| `[0]` | string | 整个匹配的文本 |
+| `[1]`, `[2]`, ... | string | 捕获组内容（按编号索引） |
+| `["name"]` | string | 命名捕获组内容（如果有） |
+| `Count` | number | 捕获组总数（不包括整体匹配） |
+| `Position` | number | 整个匹配的起始位置（从1开始） |
+| `Pos` | table | 所有捕获组的位置表（从1开始） |
+| `Len` | table | 所有捕获组的长度表 |
+
+**Pos/Len 表索引规则：**
+- `Pos[0]` / `Len[0]`：整体匹配的位置/长度
+- `Pos[1]` / `Len[1]`：第1个捕获组的位置/长度
+- `Pos["name"]` / `Len["name"]`：命名捕获组的位置/长度
 
 **示例：**
+
 ```lua
-local result = utils.regex_match("Hello World 123", "World (\\d+)")
-if result.index > 0 then
-    print("匹配位置:", result.index)
-    print("捕获组1:", result.match[1])
+-- 基本匹配
+local m = utils.regex_match("Hello World 123", "World (\\d+)")
+if m then
+    print("匹配位置:", m.Position)        -- 7
+    print("整体匹配:", m[0])              -- "World 123"
+    print("捕获组1:", m[1])               -- "123"
+    print("捕获组数:", m.Count)            -- 1
+end
+
+-- 命名捕获组
+local m = utils.regex_match("2026-08-20", "(?P<year>\\d{4})-(?P<month>\\d{2})")
+if m then
+    print(m["year"])                      -- "2026"
+    print(m["month"])                     -- "08"
+    print("年份位置:", m.Pos["year"])      -- 1
+    print("年份长度:", m.Len["year"])      -- 4
+end
+
+-- 遍历所有捕获组
+local m = utils.regex_match("abc123def", "(\\w+)(\\d+)")
+if m then
+    for i = 0, m.Count do
+        print(string.format("组%d: '%s' (位置:%d, 长度:%d)", 
+            i, m[i], m.Pos[i], m.Len[i]))
+    end
+    -- 输出:
+    -- 组0: 'abc123' (位置:1, 长度:6)
+    -- 组1: 'abc' (位置:1, 长度:3)
+    -- 组2: '123' (位置:4, 长度:3)
 end
 ```
 
@@ -527,18 +564,32 @@ end
 - `haystack`: string - 要处理的字符串
 - `needle`: string - 正则表达式模式
 - `replacement`: string - 替换字符串
-- `limit`: number (可选) - 最大替换次数，默认-1（无限制）
-- `startingPos`: number (可选) - 开始位置，默认1
+- `limit`: number (可选) - 最大替换次数，默认 -1（无限制）
+- `startingPos`: number (可选) - 开始位置，默认 1
+  - 正数：从前往后数第 N 个字符开始（1 表示第一个字符）
+  - 负数：从后往前数第 N 个字符开始（-1 表示最后一个字符）
+  - 0：从开头开始
 
-**返回值：** 替换结果对象 `{ result = string, count = number }`
+**返回值：** 返回两个值
 - `result`: string - 替换后的字符串
-- `count`: number - 替换次数
+- `count`: number - 实际替换次数
 
 **示例：**
 ```lua
-local result = utils.regex_replace("aabbcc", "b", "x", 1)
--- result.result = "aaxbcc"
--- result.count = 1
+-- 基本替换
+local result, count = utils.regex_replace("aabbcc", "b", "x", 1)
+-- result = "aaxbcc"
+-- count = 1
+
+-- 从指定位置开始替换
+local result, count = utils.regex_replace("aabbcc", "b", "x", -1, 3)
+-- 从第3个字符开始替换所有 b
+-- result = "aabxcc"
+
+-- 无限制替换
+local result, count = utils.regex_replace("aabbcc", "b", "x")
+-- result = "aaxxcc"
+-- count = 2
 ```
 
 ---

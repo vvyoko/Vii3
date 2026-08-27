@@ -11,7 +11,7 @@
    - You need to download `libmpv-2.dll` yourself and place it in the program directory
    - Most people don't need this, and `libmpv` is quite large, download it yourself if needed
 - Zip, Rar, Cbz, Cbr archive format support powered by SharpCompress
-- Advanced Lua scripting support powered by NLua
+- Advanced Lua scripting support powered by Lua-CSharp
 - OCR Support (Testing)
    - Need to download models according to the document
 - All interface elements can be removed to eliminate browsing distractions
@@ -51,7 +51,7 @@
 ## Dependencies
  - [Avalonia](https://avaloniaui.net/)
  - [Magick.NET](https://github.com/dlemstra/Magick.NET)
- - [NLua](https://github.com/nlua/NLua)
+ - [Lua-CSharp](https://github.com/nuskey8/Lua-CSharp)
  - [SharpCompress](https://github.com/adamhathcock/sharpcompress)
  - [Microsoft.Data.Sqlite](https://docs.microsoft.com/dotnet/standard/data/sqlite/)
  - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)

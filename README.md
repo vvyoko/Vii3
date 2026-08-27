@@ -12,7 +12,7 @@
    - 需自行下载 `libmpv-2.dll` 放置程序所在目录
    - 大部分人无此需求,且 `libmpv` 比较大 ,需要的自行下载
 - 由 SharpCompress 驱动带来 Zip，Rar, Cbz, Cbr 压缩包格式支持
-- 由 NLua 驱动带来 高级需求 lua 支持
+- 由 Lua-CSharp 驱动带来 高级需求 lua 支持
 - OCR 支持 (测试中)
    - 需根据文档下载相关模型
 - 界面元素可全部移除以去除对浏览的干扰
@@ -51,7 +51,7 @@
 ## 引用
  - [Avalonia](https://avaloniaui.net/)
  - [Magick.NET](https://github.com/dlemstra/Magick.NET)
- - [NLua](https://github.com/nlua/NLua)
+ - [Lua-CSharp](https://github.com/nuskey8/Lua-CSharp)
  - [SharpCompress](https://github.com/adamhathcock/sharpcompress)
  - [Microsoft.Data.Sqlite](https://docs.microsoft.com/dotnet/standard/data/sqlite/)
  - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
