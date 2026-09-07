@@ -97,6 +97,15 @@
     - `Background`
       - Used to set the background color in software render mode using the `#AARRGGBB` or `#RRGGBB` format.
       - Invalid values or missing configurations will fallback to `#202020`.
+    - `DateTimeFormat` specifies the date format
+      - Refer to [Custom date and time format strings](https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
+      - Example `yyyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
+    - [DebugOverlays](https://docs.avaloniaui.net/api/avalonia/rendering/rendererdebugoverlays) performance testing
+      - 0 `None`
+      - 1 `Fps`
+      - 2 `DirtyRects`
+      - 4 `LayoutTimeGraph`
+      - 8 `RenderTimeGraph`
   - Shortcuts and Menus
     - If you are unsure how to configure parameters or target values:
     - Hover over `Command` or `Binding Status` to view the original values.
