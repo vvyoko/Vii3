@@ -99,7 +99,7 @@
       - 无效值或未设置回退至 `#202020`
     - `DateTimeFormat` 指定日期格式
       - 参考 [自定义日期和时间格式字符串](https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
-      - 示例 `yyyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
+      - 示例 `yyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
     - [DebugOverlays](https://docs.avaloniaui.net/api/avalonia/rendering/rendererdebugoverlays) 性能测试
       - 0 `None`
       - 1 `Fps`

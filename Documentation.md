@@ -99,7 +99,7 @@
       - Invalid values or missing configurations will fallback to `#202020`.
     - `DateTimeFormat` specifies the date format
       - Refer to [Custom date and time format strings](https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
-      - Example `yyyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
+      - Example `yyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
     - [DebugOverlays](https://docs.avaloniaui.net/api/avalonia/rendering/rendererdebugoverlays) performance testing
       - 0 `None`
       - 1 `Fps`
