@@ -741,7 +741,7 @@
 <summary><b>CopyFormat</b></summary>
 
 * ##### Image
-  - Description: Copy image
+  - Description: Copy image (when annotations and effects are present, they are baked in and included)
   - ID: 0
 * ##### ImageToBase64
   - Description: Copy image as Base64
@@ -755,9 +755,6 @@
 * ##### ImageInfo
   - Description: Copy image info (includes data displayed on interface and AI Prompt, XMP)
   - ID: 20
-* ##### Composite
-  - Description: Copy the "edited image" — the same composite as SaveAs (effects underneath, annotations on top, baked together), except the destination is the clipboard instead of a file; original untouched
-  - ID: 30
 </details>
 
 <details style="margin-left: 20px;" id="AnnotationActionKind" open>
