@@ -1,16 +1,8 @@
+## 说明
+- 本文档（含 lua / 特效相关参数）主要供 AI 读取以辅助自定义；如需自行扩展，请让 AI 直接阅读**中文版**。
+- 英文版（Documentation.md）为人工维护的人类可读参考，参数表可能与中文版不同步，自定义请以中文版为准。
+
 ## 特殊
-- 动态照片
-  - 播放动态照片中的视频流依赖于 `libmpv-2.dll`。
-  - 由于文件体积较大且涉及开源协议传染性，本软件默认不附带此组件，有需求的用户需自行下载并放置于 `vii3.exe` 同级目录下。
-  - 下载方案：
-    - A（体积小, 版本旧）：下载 [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) 发布的 `media_kit_test_win32_x64.7z`，解压并提取其中的 `libmpv-2.dll`。
-    - B（体积大,版本新）： 下载 [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases)  `mpv-dev-x86_64-v3` 或 `mpv-dev-x86_64` ，解压并提取其中的 `libmpv-2.dll`。
-  - 复用方案: 
-    - 若你在系统其他地方已拥有该组件，可彻底退出软件后，打开程序目录下的 `data\set.json` 文件。
-    - 找到 `"LibMpvPath"` 字段，将其值修改为你想复用的 `libmpv-2.dll` 的**绝对路径**。
-      - 文件名必需为 `libmpv-2.dll` 而不是 `libmpv.dll` 或其他
-      - 路径需符合 `Json` 规范使用转义 `\\` 或用 `/`
-      - 如 `"LibMpvPath": "D:\\OneDrive\\Program\\AHK\\lib\\libmpv\\libmpv-2.dll"`
 - 加载流程
   - 图片的定义是后缀名是图片后缀名
   - 打开单张图片会打开同目录下所有图片
@@ -25,24 +17,21 @@
   - 可通过拖拽,粘贴,运行参数加载
     - 运行参数加载(可传递多个或单个)
       - `Vii3.exe img1 img2 dir1 dir2 zip1 rar2`
-- 文件关联图标
-  - 未提供的原因是我无力制作较美观的图标
-  - 在`data`目录下新建子文件夹`icons`
-  - 获取或制作 `ico` 格式的图标
-  - 以 `后缀名.ico` 格式命名 
-     - 如 `bmp.ico` `jpg.ico` 
+- data 子目录
+  - `icons` 文件关联图标
+    - 未提供的原因是无力制作较美观的图标
+    - 获取或制作 `ico` 格式的图标
+    - 以 `后缀名.ico` 格式命名 
+      - 如 `bmp.ico` `jpg.ico` 
+  - `scripts` lua脚本
+  - `effects` 特效脚本
+  - `langs` 语言文件
 - 临时目录位置 `%temp%\vvyoko\Vii3`
   - 暂时只存放日志
-  - 压缩包,动态照片中视频已完全迁至内存流
+  - `magick` magick临时目录 (已采取手段尽量避免生成临时文件)
 - 快捷键
   - 层级 - 除全局外其余是同级,优先执行非全局
-  - 右键菜单部分不显示快捷键是因为它只能放它认为的快捷键
   - Lua 中定义的快捷键会覆盖设置中的快捷键
-  - 设置中的快捷键显示太乱属于美工无力
-  - 缩略图层级绑定限制
-    - 请勿绑定任何涉及鼠标按键或滚轮的操作（即使带有 Ctrl/Shift 等修饰键）。
-    - 因为缩略图的原生控件本身会强行持有鼠标事件
-    - 自定义的鼠标绑定大概率会被控件拦截而失效。
 - 在标题和图片信息处按住左键可移动窗口位置
 - 缩略图
   - 缓存命中与失效机制：
@@ -92,11 +81,10 @@
   - 通用设置手动编辑选项
     - 需退出程序后编辑 `data\set.json`
     - 未在设置界面添加代表不希望普通用户去自定义
-    - `LibMpvPath` 参考上文
     - `OneOcrDirectory` 设置OCR模型文件夹位置,复用模型,注意部分目录无权限读取如`WindowsApps`
     - `Background`
-      - 用于设置软解渲染下背景颜色 `#AARRGGBB` 或 `#RRGGBB`
-      - 无效值或未设置回退至 `#202020`
+      - 用于设置背景颜色 `#AARRGGBB` 或 `#RRGGBB`
+      - 无效值或未设置回退至默认磨砂主题
     - `DateTimeFormat` 指定日期格式
       - 参考 [自定义日期和时间格式字符串](https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
       - 示例 `yyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
@@ -138,7 +126,11 @@
   - 说明: 切换
   - ID: 6
   - 参数: [ToggleTarget](#ToggleTarget)
-  
+
+* #### SaveAs
+  - 说明: 把特效与标注合并烘焙进图片并另存为（每次手动选路径，原图不动）
+  - ID: 7
+
 * #### SendMessageToScript
   - 说明: 向脚本引擎发送消息
   - ID: 21
@@ -177,10 +169,23 @@
 * #### RotateMirror
   - 说明: 旋转&镜像
   - ID: 210
-  - 参数: [SortField](#SortField)
+  - 参数: [RotateMirrorType](#RotateMirrorType)
 * #### LoadOriginalImage
   - 说明: 加载/查看原图
   - ID: 220
+
+* #### SetImageEffect
+  - 说明: 设置显示特效
+  - ID: 225
+  - 参数: `string`
+    - 格式: `<id> [名字 值 [; 名字 值]…]`
+    - id 为效果标识，三种写法都行：
+      - 内置效果 = `<lomo>` 这类尖括号包裹的标识
+      - `data/effects` 根目录下的脚本 = 去后缀文件名（如 `test.lua` → `test`）
+      - 子文件夹内 = 相对 effects 的路径去后缀（如 `demo/magnifier.lua` → `demo/magnifier`）
+    - 空串 = 不套效果
+    - 只写 id = 换效果；带参数（如 `demo/magnifier radius 0.3`）= 换效果 + 设参数（`+/-` 表示在当前值上增减）
+
 * #### ThumbnailGridAction
   - 说明: 缩略图动作
   - ID: 230
@@ -189,6 +194,12 @@
   - 说明: 视频动作
   - ID: 240
   - 参数: [VideoAction](#VideoAction)
+
+* #### OcrAction
+  - 说明: OCR动作
+  - ID: 245
+  - 参数: [OcrAction](#OcrAction)
+
 * #### SelectorSet
   - 说明: 设置选择器
   - ID: 300
@@ -310,6 +321,13 @@
   - ID: 403
   - 参数: ([ImageFillMode](#ImageFillMode))
     -  示例: `FillWindow,FitWindow`
+
+* #### AnnotateAction
+  - 说明: 标注动作（撤销/重做/清空/删除）
+  - ID: 500
+  - 参数: [AnnotationActionKind](#AnnotationActionKind)
+    - 未进入标注模式时无动作可执行
+
 </details>
 <details style="margin-left: 20px;" open>
 <summary><b>属性</b></summary>
@@ -382,6 +400,12 @@
   - 说明: 是否处于Ocr模式
   - ID: 261
   - 类型: bool
+
+* #### IsInAnnotateMode
+  - 说明: 是否处于标注模式
+  - ID: 262
+  - 类型: bool
+
 * #### FillMode
   - 说明: 填充模式
   - ID: 500
@@ -393,6 +417,14 @@
     - None
     - Horizontal
     - Vertical
+
+* #### ImageEffect
+  - 说明: 显示特效（运行时状态）
+  - ID: 502
+  - 类型: string
+    - 值是效果 id（如 `<lomo>`），空 = 不套效果
+    - 菜单勾选 / 快捷键 / Lua 均按此 id 比对
+
 * #### ZoomFactor
   - 说明: 缩放比例
   - ID: 530
@@ -451,8 +483,8 @@
 * ##### Thumbnail
   - 说明: 缩略图
   - ID: 1
-* ##### Crop
-  - 说明: 裁剪
+* ##### Selector
+  - 说明: 选择器
   - ID: 2
 * ##### Video
   - 说明: 视频
@@ -460,6 +492,9 @@
 * ##### Ocr
   - 说明: Ocr
   - ID: 4
+* ##### Annotate
+  - 说明: 标注层
+  - ID: 5
 </details>
 
 <details style="margin-left: 20px;" id="SelectorAdjustment" open>
@@ -504,8 +539,8 @@
 * ##### SelectAll
   - 说明: 全选
   - ID: 12
-* ##### ResetCrop
-  - 说明: 重置选框
+* ##### ResetSelect
+  - 说明: 重置选择框
   - ID: 13
 </details>
 
@@ -666,12 +701,15 @@
 * ##### ImageTopAligned
   - 说明: 图片顶部对齐
   - ID: 31
-* ##### Crop
-  - 说明: 裁剪
+* ##### Selector
+  - 说明: 选择器
   - ID: 32
 * ##### Ocr
   - 说明: Ocr
   - ID: 33
+* ##### Annotate
+  - 说明: 标注模式（进入 ↔ 退出）
+  - ID: 34
 * ##### WindowFitsImage
   - 说明: 窗口适应图片
   - ID: 35
@@ -727,6 +765,27 @@
 * ##### ImageInfo
   - 说明: 复制图片信息 (包含界面上显示的数据及AI Prompt, XMP)
   - ID: 20
+* ##### Composite
+  - 说明: 复制"编辑后的图片"：与另存为同一张合成图（特效在下、标注在上烘焙而成），只是去处是剪贴板而不是文件，原图不动
+  - ID: 30
+</details>
+
+
+<details style="margin-left: 20px;" id="AnnotationActionKind" open>
+<summary><b>AnnotationActionKind</b></summary>
+
+* ##### Undo
+  - 说明: 撤销一步标注
+  - ID: 1
+* ##### Redo
+  - 说明: 重做一步标注
+  - ID: 2
+* ##### Clear
+  - 说明: 清空全部标注
+  - ID: 3
+* ##### Delete
+  - 说明: 删除当前选中的标注
+  - ID: 4
 </details>
 
 

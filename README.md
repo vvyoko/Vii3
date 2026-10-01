@@ -8,11 +8,9 @@
     - 保证机械硬盘仍有优秀体验
 - 由 SkiaSharp 及 Magick.Net 驱动，全图片格式支持
 - 动图 Gif，Webp，Apng，Jxl，Avif
-- 由 Libmpv 驱动 实现动态照片支持
-   - 需自行下载 `libmpv-2.dll` 放置程序所在目录
-   - 大部分人无此需求,且 `libmpv` 比较大 ,需要的自行下载
 - 由 SharpCompress 驱动带来 Zip，Rar, Cbz, Cbr 压缩包格式支持
 - 由 Lua-CSharp 驱动带来 高级需求 lua 支持
+- 实况照片支持
 - OCR 支持 (测试中)
    - 需根据文档下载相关模型
 - 界面元素可全部移除以去除对浏览的干扰
@@ -45,6 +43,7 @@
   - [为什么是3，因为有前作](https://meta.appinn.net/t/topic/35989/)
   - [文档](zh_Documentation.md)
   - [Lua文档](zh_Lua-Documentation.md)
+  - [特效文档](zh_Effects-Documentation.md)
   - [已知问题](zh_Known-Issues.md)
 ---
 
@@ -55,4 +54,6 @@
  - [SharpCompress](https://github.com/adamhathcock/sharpcompress)
  - [Microsoft.Data.Sqlite](https://docs.microsoft.com/dotnet/standard/data/sqlite/)
  - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
+ - [Microsoft.Windows.CsWin32](https://github.com/microsoft/CsWin32)
+ - [Vii3Media](https://github.com/vvyoko/Vii3Media)
 

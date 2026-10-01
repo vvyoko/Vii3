@@ -6,6 +6,28 @@
       - The entire process takes very long, so it's abandoned
 
 
+- **Extremely Large PNG Crashes**
+  - See #8
+  - This program will attempt to load the maximum supported resolution
+  - `PNG` decoding is assigned to `Skia` by default
+  - `Skia` may fail to handle this case, but it is unclear whether it is an isolated incident or widespread
+  - Adding `.png` to `Wic Format` to assign it to `Wic` decoding temporarily avoids this issue
+  - More observation to follow
+  - Formats other than `jpeg` and `jpg` may also exhibit this, but pending observation
+
+- **Animated Image Memory Usage**
+  - There are two options
+  - 1 Decode each frame
+    - **In some** cases, sustained high CPU usage
+    - More power-consuming, and frame rate may be unstable
+  - 2 Cache decoded frames
+    - **In some** cases, excessive memory usage
+    - After decoding completes, frame rate is stable and more energy-efficient
+  - Current logic caches all frames
+  - Extremely large animated images can occupy over 1.5GB of local memory (Method 1: sustained 20% or even higher CPU usage)
+  - Memory usage is currently at an acceptable level
+  - If there are more complex animated images, memory usage may be higher, but pending observation
+
 - **Animated Images, Live Photos Related**
   - Mini map displays the first frame, only used for position navigation
   - Live photos may be locked to 30fps in some cases
@@ -13,25 +35,8 @@
     - Suspected to be a framework compositor issue or decoding pressure
     - You can hide UI elements and shrink images to see if there's improvement
   - Some live photos do not follow rules, may write incorrectly or not write `XMP` at all, and are simply ignored
-  - Ocr , Crop and save operations are not supported
+  - Crop, OCR, Effects, Annotation, and save operations are not supported
     - However, they are not blocked; calling them will operate on the first frame of the image
-  - `Avif` has suspected transparency support issues
-  - `Avif` does not display correct frame count
-      - It is actually a video format, getting data is very slow
-      - So data reading was implemented manually for now
-      - Waiting for upstream fix or it may not be fixable
-
-- **Slow Loading of Avif Animations**
-  - By default, **libmpv** is not included, meaning the slow parsing is currently the fallback solution.
-  - **Avif** belongs to video streams; when **libmpv** is not included, **Magick.Net** is used for parsing instead.
-  - **Magick.Net** is positioned as an image processing library and may not naturally excel at parsing this specific format.
-    - See [MagickImage.ping() of some special avif file very slow](https://github.com/dlemstra/Magick.NET/issues/2005)
-    - This discussion only addresses loading basic information, and the fix only reads the first frame.
-  - When loading the full animation stream, the time consumption mentioned in the discussion above is unavoidable.
-    - Attempted to implement "play while loading", but the time overhead mentioned above still cannot be bypassed.
-  - Given that an optional **libmpv** solution exists, no other specialized libraries will be introduced to handle this.
-  - If there is a high demand for **Avif animations**, please refer to the documentation to download **libmpv**.
-    - **libmpv** is a professional video processing library that excels at handling video formats.
 
 - ### Window Flicker with Window Fit To Image
   - Window auto-sizing essentially triggers window resizing operations fully controlled by the system; no custom handling can be implemented at the application layer
@@ -54,24 +59,4 @@
     - Combined overhead of resizing and OCR processing leads to noticeable latency. To prevent UI thread blocking, the entire workflow is offloaded to a separate worker thread
     - Thread safety of the underlying OCR library is unconfirmed. If crashes occur randomly during OCR invocation, please submit feedback for logic adjustments
 
-- **Thumbnails**
-  - **The control is no longer maintained; bugs may occur, but there is no alternative**
-  - **Intermittent (or Frequent?) Positional Glitches**:
-    - Suspected to be an issue with the control itself, making it difficult to resolve
-  - **Size Adjustment**:
-    - Certain values may cause incorrect positioning and movement
-      - Set other values
-    - Occasionally, some images may fail to load
-      - Difficult to replicate, making it hard to target and resolve
-      - The simplest workaround for now is to restart the application
-  - **Image failure messages appear on the thumbnail interface**:
-    - An edge case; please switch to the next image
-
-- **Some Exif Values are Garbled, Mainly Because EXIF Has No Encoding**
-
 - **ICO is a Container Format, the Image Info Detection Shows Png is Correct Behavior**
-
-- **Avalonia Version Stuck at 11**
-  - Suspected sharp performance drop without any code changes
-    - Replaced core dependency property `ExtendClientAreaChromeHints` with `None`
-    - Replaced all deprecated methods with recommended alternatives

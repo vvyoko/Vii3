@@ -7,11 +7,9 @@
     - Ensures excellent experience even on mechanical hard drives
 - Full image format support powered by SkiaSharp and Magick.Net
 - Animation Gif, Webp, Apng, Jxl, Avif support
-- live photo support powered by Libmpv
-   - You need to download `libmpv-2.dll` yourself and place it in the program directory
-   - Most people don't need this, and `libmpv` is quite large, download it yourself if needed
 - Zip, Rar, Cbz, Cbr archive format support powered by SharpCompress
 - Advanced Lua scripting support powered by Lua-CSharp
+- Live photo support
 - OCR Support (Testing)
    - Need to download models according to the document
 - All interface elements can be removed to eliminate browsing distractions
@@ -45,8 +43,10 @@
 ## Other
   - [Why 3? Because there was a predecessor](https://meta.appinn.net/t/topic/35989/)
   - [Documentation](Documentation.md)
-  - [Lua Documentation](Lua-Documentation.md)
   - [Known Issues](Known-Issues.md)
+  - The Lua and Effects documents are AI-generated artifacts meant to be consumed by AI — **not for human reading**. They may differ from the Chinese versions (which are the canonical source). To extend or customize, have AI read the Chinese versions directly:
+    - [Lua Documentation (Chinese)](zh_Lua-Documentation.md)
+    - [Effects Documentation (Chinese)](zh_Effects-Documentation.md)
 ---
 ## Dependencies
  - [Avalonia](https://avaloniaui.net/)
@@ -55,3 +55,5 @@
  - [SharpCompress](https://github.com/adamhathcock/sharpcompress)
  - [Microsoft.Data.Sqlite](https://docs.microsoft.com/dotnet/standard/data/sqlite/)
  - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
+ - [Microsoft.Windows.CsWin32](https://github.com/microsoft/CsWin32)
+ - [Vii3Media](https://github.com/vvyoko/Vii3Media)

@@ -1,18 +1,9 @@
+## Notes
+- This document (including lua / effect-related parameters) is primarily intended for AI to read and assist with customization; if you need to extend it yourself, have the AI read the **Chinese version**.
+- The English version (Documentation.md) is a human-maintained, human-readable reference; its parameter tables may be out of sync with the Chinese version. For customization, always refer to the Chinese version.
+
 ## Special
-- Live Photos
-  - Playing the video stream in Live Photos requires `libmpv-2.dll`.
-  - Due to the large file size and the copyleft nature of its open-source license, this software does not include this component by default. Users who need this feature must download it manually and place it in the same directory as `vii3.exe`.
-  - Download Methods:
-    - A (Smaller Size, Older Version): Download `media_kit_test_win32_x64.7z` from the [media-kit (v1.1.10)](https://github.com/media-kit/media-kit/releases/tag/media_kit-v1.1.10) release, then extract `libmpv-2.dll` from it.
-    - B (Larger Size, Newer Version): Download `mpv-dev-x86_64-v3` or `mpv-dev-x86_64` from [zhongfly/mpv-winbuild](https://github.com/zhongfly/mpv-winbuild/releases), then extract `libmpv-2.dll` from it.
-  - Reusing an Existing Component: 
-    - If you already have this component elsewhere on your system, you can reuse it. Completely exit the software, then open the `data\set.json` file located in the program directory.
-    - Find the `"LibMpvPath"` field and change its value to the **absolute path** of the `libmpv-2.dll` you want to reuse.
-      - The file name must be exactly `libmpv-2.dll`, not `libmpv.dll` or anything else.
-      - The path must comply with JSON specifications, using either escaped backslashes `\\` or forward slashes `/`.
-      - Example: `"LibMpvPath": "D:\\OneDrive\\Program\\AHK\\lib\\libmpv\\libmpv-2.dll"`
-- Loading Process
-  - An image is defined as a file with an image file extension
+- An image is defined as a file with an image file extension
   - Opening a single image will open all images in the same directory
     - File change monitoring is enabled to respond to external modifications
     - i.e., deleting or modifying files by external programs will be detected and updated
@@ -25,24 +16,21 @@
   - Files can be loaded via drag & drop, clipboard, or command line arguments
     - Command line arguments (multiple files or folders supported)
       - `Vii3.exe img1 img2 dir1 dir2 zip1 rar2`
-- File Association Icons
-  - Icons are not provided because I cannot create aesthetically pleasing ones
-  - Create a subfolder named `icons` in the `data` directory
-  - Obtain or create icons in `ico` format
-  - Name them using the format `extension.ico`
-     - Example: `bmp.ico`, `jpg.ico`
+- data sub-directories
+  - `icons` file association icons
+    - Not provided because I cannot make aesthetically pleasing ones
+    - Obtain or create icons in `ico` format
+    - Name them using the format `extension.ico`
+      - Example: `bmp.ico`, `jpg.ico`
+  - `scripts` lua scripts
+  - `effects` effect scripts
+  - `langs` language files
 - Temp Directory Location: `%temp%\vvyoko\Vii3`
   - Currently only stores logs
-  - Compressed archives and videos from dynamic photos have been fully migrated to memory streams
+  - `magick` magick temp directory (measures have been taken to avoid generating temp files as much as possible)
 - Shortcut Keys
   - Layer Priority: Except for the global layer, all layers are peer levels; keys registered in a specific layer take precedence over global ones.
-  - Shortcut keys are not displayed in right-click menus, as the menu only shows system-recognized shortcuts.
   - Shortcuts defined in Lua override those configured in settings.
-  - Cluttered display of shortcut keys in settings is due to insufficient UI design optimization.
-  - Thumbnail layer Mouse Binding Restrictions:
-    - Never bind any actions involving mouse clicks or scroll wheel (even with Ctrl/Shift modifiers).
-    - The native grid control forcefully hooks and monopolizes all mouse-related window messages.
-    - Any custom mouse hotkeys will invariably be swallowed and neutralised by the control itself.
 - Press and hold the left mouse button on the title and image info area to move the window
 - Thumbnail
   - Cache Hit & Invalidation Mechanism:
@@ -92,11 +80,10 @@
   - Manual Editing Options for General Settings
     - Requires exiting the program before editing `data\set.json`.
     - Options not included in the settings interface imply that regular users are not encouraged to customize them.
-    - For `"LibMpvPath"`, please refer to the section above.
     - `OneOcrDirectory` Set the OCR model folder location, reuse the model, and note that some directories may not have permission to read like `WindowsApps`
     - `Background`
-      - Used to set the background color in software render mode using the `#AARRGGBB` or `#RRGGBB` format.
-      - Invalid values or missing configurations will fallback to `#202020`.
+      - Used to set the background color using the `#AARRGGBB` or `#RRGGBB` format.
+      - Invalid values or missing configurations will fallback to the default frosted-glass theme.
     - `DateTimeFormat` specifies the date format
       - Refer to [Custom date and time format strings](https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
       - Example `yyyy-MM-dd hh:mm:ss` -> `2026-09-05 19:13:34`
@@ -138,6 +125,10 @@
   - ID: 6
   - Parameter: [ToggleTarget](#ToggleTarget)
 
+* #### SaveAs
+  - Description: Bake effects and annotations into the image and save as a new file (manual path selection each time, original untouched)
+  - ID: 7
+
 * #### SendMessageToScript
   - Description: Send message to script engine
   - ID: 21
@@ -176,10 +167,21 @@
 * #### RotateMirror
   - Description: Rotate & Mirror
   - ID: 210
-  - Parameter: [SortField](#SortField)
+  - Parameter: [RotateMirrorType](#RotateMirrorType)
 * #### LoadOriginalImage
   - Description: Load/View original image
   - ID: 220
+* #### SetImageEffect
+  - Description: Set display effect
+  - ID: 225
+  - Parameter: `string`
+    - Format: `<id> [name value [; name value]…]`
+    - id is the effect identifier; three forms are accepted:
+      - Built-in effect = angle-bracketed id like `<lomo>`
+      - Script directly under `data/effects` = filename without extension (e.g., `test.lua` → `test`)
+      - Script in a subfolder = path relative to effects without extension (e.g., `demo/magnifier.lua` → `demo/magnifier`)
+    - Empty string = no effect applied
+    - id only = switch effect; with parameters (e.g., `demo/magnifier radius 0.3`) = switch effect + set parameters (`+/-` means increment/decrement on the current value)
 * #### ThumbnailGridAction
   - Description: Thumbnail grid action
   - ID: 230
@@ -188,6 +190,10 @@
   - Description: Video action
   - ID: 240
   - Parameter: [VideoAction](#VideoAction)
+* #### OcrAction
+  - Description: OCR action
+  - ID: 245
+  - Parameter: [OcrAction](#OcrAction)
 * #### SelectorSet
   - Description: Set Selector
   - ID: 300
@@ -309,6 +315,13 @@
   - ID: 403
   - Parameter: ([ImageFillMode](#ImageFillMode))
     - Example: `FillWindow,FitWindow`
+
+* #### AnnotateAction
+  - Description: Annotation action (undo/redo/clear/delete)
+  - ID: 500
+  - Parameter: [AnnotationActionKind](#AnnotationActionKind)
+    - No action is executable if not in annotation mode
+
 </details>
 <details style="margin-left: 20px;" open>
 <summary><b>Properties</b></summary>
@@ -381,6 +394,10 @@
   - Description: In OCR mode
   - ID: 261
   - Type: bool
+* #### IsInAnnotateMode
+  - Description: In annotation mode
+  - ID: 262
+  - Type: bool
 * #### FillMode
   - Description: Fill mode
   - ID: 500
@@ -392,6 +409,12 @@
     - None
     - Horizontal
     - Vertical
+* #### ImageEffect
+  - Description: Display effect (runtime state)
+  - ID: 502
+  - Type: string
+    - Value is the effect id (e.g., `<lomo>`); empty = no effect applied
+    - Menu check, shortcuts, and Lua all compare against this id
 * #### ZoomFactor
   - Description: Zoom ratio
   - ID: 530
@@ -450,8 +473,8 @@
 * ##### Thumbnail
   - Description: Thumbnail
   - ID: 1
-* ##### Crop
-  - Description: Crop
+* ##### Selector
+  - Description: Selector
   - ID: 2
 * ##### Video
   - Description: Video
@@ -459,6 +482,9 @@
 * ##### Ocr
   - Description: Ocr
   - ID: 4
+* ##### Annotate
+  - Description: Annotation layer
+  - ID: 5
 </details>
 
 <details style="margin-left: 20px;" id="SelectorAdjustment" open>
@@ -503,8 +529,8 @@
 * ##### SelectAll
   - Description: Select all
   - ID: 12
-* ##### ResetCrop
-  - Description: Reset crop box
+* ##### ResetSelect
+  - Description: Reset selection box
   - ID: 13
 </details>
 
@@ -665,12 +691,15 @@
 * ##### ImageTopAligned
   - Description: Image top aligned
   - ID: 31
-* ##### Crop
-  - Description: Crop
+* ##### Selector
+  - Description: Selector
   - ID: 32
 * ##### Ocr
   - Description: Ocr
   - ID: 33
+* ##### Annotate
+  - Description: Annotation mode (enter ↔ exit)
+  - ID: 34
 * ##### WindowFitsImage
   - Description: Window fit to image
   - ID: 35
@@ -726,6 +755,26 @@
 * ##### ImageInfo
   - Description: Copy image info (includes data displayed on interface and AI Prompt, XMP)
   - ID: 20
+* ##### Composite
+  - Description: Copy the "edited image" — the same composite as SaveAs (effects underneath, annotations on top, baked together), except the destination is the clipboard instead of a file; original untouched
+  - ID: 30
+</details>
+
+<details style="margin-left: 20px;" id="AnnotationActionKind" open>
+<summary><b>AnnotationActionKind</b></summary>
+
+* ##### Undo
+  - Description: Undo one annotation step
+  - ID: 1
+* ##### Redo
+  - Description: Redo one annotation step
+  - ID: 2
+* ##### Clear
+  - Description: Clear all annotations
+  - ID: 3
+* ##### Delete
+  - Description: Delete the currently selected annotation
+  - ID: 4
 </details>
 
 <details style="margin-left: 20px;" id="RotateMirrorType" open>
